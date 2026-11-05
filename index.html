@@ -1,0 +1,887 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>M03 Lernkarten</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800;900&display=swap');
+:root{
+  --bg:#f4f1fb; --bg2:#fdf4ec; --surface:#ffffff; --surface2:#f1eef8; --text:#1f1b2e; --muted:#6a6580; --line:#e2dcef;
+  --accent:#6d28d9; --accent-soft:#efe7ff; --ok:#15803d; --ok-soft:#dcfce7; --warn:#c2410c; --warn-soft:#ffedd5;
+  --kurs:#0f766e; --cs:#1d4ed8; --fall:#7e22ce; --calc:#15803d; --allg:#c2410c;
+  --shadow:0 2px 6px rgba(60,30,120,.08),0 18px 40px rgba(60,30,120,.12);
+  --t-grund:#6366f1; --t-grund2:#4338ca;
+  --t-pareto:#f59e0b; --t-pareto2:#b45309;
+  --t-ursache:#f43f5e; --t-ursache2:#be123c;
+  --t-kpi:#10b981; --t-kpi2:#047857;
+  --t-wert:#0ea5e9; --t-wert2:#0369a1;
+  --t-roi:#84cc16; --t-roi2:#3f6212;
+  --t-reife:#a855f7; --t-reife2:#6b21a8;
+  --t-score:#ec4899; --t-score2:#9d174d;
+  --t-pitch:#f97316; --t-pitch2:#c2410c;
+  --t-fall:#14b8a6; --t-fall2:#0f766e;
+  --t-flash:#3b82f6; --t-flash2:#9333ea;
+  --t-sum:#e11d48; --t-sum2:#7c3aed;
+  --t-all:#8b5cf6; --t-all2:#db2777;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#15121f; --bg2:#1d1426; --surface:#211d2e; --surface2:#2b2640; --text:#eeeaf7; --muted:#aaa3c2; --line:#3a3452;
+    --accent:#c4b5fd; --accent-soft:#2e2650; --ok:#86efac; --ok-soft:#173523; --warn:#fdba74; --warn-soft:#3b2414;
+    --kurs:#5eead4; --cs:#93c5fd; --fall:#d8b4fe; --calc:#86efac; --allg:#fdba74;
+    --shadow:0 18px 40px rgba(0,0,0,.45);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#15121f; --bg2:#1d1426; --surface:#211d2e; --surface2:#2b2640; --text:#eeeaf7; --muted:#aaa3c2; --line:#3a3452;
+  --accent:#c4b5fd; --accent-soft:#2e2650; --ok:#86efac; --ok-soft:#173523; --warn:#fdba74; --warn-soft:#3b2414;
+  --kurs:#5eead4; --cs:#93c5fd; --fall:#d8b4fe; --calc:#86efac; --allg:#fdba74;
+  --shadow:0 18px 40px rgba(0,0,0,.45);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:radial-gradient(1200px 600px at 0% -10%,var(--bg2),transparent 60%),radial-gradient(900px 500px at 100% 0%,var(--accent-soft),transparent 60%),var(--bg);background-attachment:fixed;color:var(--text);font:16px/1.55 "Nunito",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;min-height:100vh}
+.wrap{max-width:880px;margin:0 auto;padding:24px 16px 64px}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+header h1{font-size:2rem;font-weight:900;margin:0 0 4px;letter-spacing:-.02em;background:linear-gradient(90deg,#6366f1,#ec4899 45%,#f59e0b 75%,#10b981);-webkit-background-clip:text;background-clip:text;color:transparent}
+header p{margin:0;color:var(--muted);font-size:.92rem;max-width:560px}
+button{font:inherit;cursor:pointer}
+.btn{border:1.5px solid var(--line);background:var(--surface);color:var(--text);border-radius:999px;padding:7px 15px;font-size:.88rem;font-weight:700;transition:transform .12s,border-color .12s,box-shadow .12s}
+.btn:hover{border-color:var(--accent);transform:translateY(-1px);box-shadow:0 4px 12px rgba(109,40,217,.15)}
+.btn:active{transform:translateY(0)}
+.search{position:relative;margin:20px 0 0}
+.search input{width:100%;font:inherit;font-size:1rem;font-weight:700;color:var(--text);background:var(--surface);border:2px solid var(--line);border-radius:999px;padding:12px 44px 12px 46px;outline:none;transition:border-color .15s,box-shadow .15s;-webkit-appearance:none;appearance:none}
+.search input::-webkit-search-cancel-button{display:none}
+.search input:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+.search .si{position:absolute;left:16px;top:50%;transform:translateY(-50%);font-size:1.05rem;pointer-events:none}
+.search .sx{position:absolute;right:8px;top:50%;transform:translateY(-50%);border:0;background:var(--surface2);color:var(--muted);border-radius:50%;width:30px;height:30px;font-weight:800}
+.shint{font-size:.84rem;color:var(--muted);font-weight:700;margin:8px 4px 0}
+mark{background:#fde047;color:#1f1b2e;border-radius:4px;padding:0 2px}
+.front mark{background:#fef08a}
+.own-btn{background:linear-gradient(135deg,#6366f1,#ec4899);color:#fff;border-color:transparent}
+.own-btn:hover{border-color:transparent}
+.btn.primary{background:var(--accent);color:var(--surface);border-color:var(--accent)}
+.panel{background:var(--surface);border:1.5px solid var(--line);border-radius:22px;padding:18px;margin-top:18px;box-shadow:var(--shadow)}
+.panel .ph{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.panel h2{margin:0;font-size:1.2rem;font-weight:900}
+.panel h3{margin:0 0 10px;font-size:1rem;font-weight:800}
+.panel .warn{background:var(--warn-soft);border-left:4px solid var(--warn);border-radius:10px;padding:8px 12px;font-size:.88rem;margin:12px 0}
+.pgrid{display:grid;grid-template-columns:1fr 1.4fr;gap:12px}
+@media (max-width:640px){.pgrid{grid-template-columns:1fr}}
+.box{background:var(--surface2);border-radius:16px;padding:14px;margin-bottom:12px}
+.box label{display:flex;flex-direction:column;gap:4px;font-size:.82rem;font-weight:800;color:var(--muted);margin-bottom:10px}
+.box input:not([type=color]):not([type=file]),.box textarea,.box select{font:inherit;font-size:.95rem;font-weight:600;color:var(--text);background:var(--surface);border:1.5px solid var(--line);border-radius:10px;padding:8px 10px;width:100%}
+.box textarea{resize:vertical}
+.box input[type=color]{width:100%;height:40px;border:1.5px solid var(--line);border-radius:10px;background:var(--surface);padding:3px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.io{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.io label.btn{display:inline-flex;flex-direction:row;margin:0;color:var(--text);font-size:.88rem}
+.pmsg{font-size:.86rem;font-weight:700;color:var(--ok);min-height:1.2em;margin:8px 0 0}
+.orow{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--line);font-size:.9rem}
+.orow:last-child{border-bottom:0}
+.orow .ot{font-weight:800}
+.orow .oq{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.orow .acts{display:flex;gap:6px;flex-shrink:0}
+.mini{font-size:.76rem;padding:4px 10px}
+.tag.own{color:#db2777}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 10px}
+.chip{--c:var(--t-all);--c2:var(--t-all2);border:1.5px solid color-mix(in srgb,var(--c) 45%,transparent);background:var(--surface);color:var(--text);border-radius:999px;padding:5px 13px 5px 10px;font-size:.86rem;font-weight:700;display:flex;align-items:center;gap:6px;transition:transform .12s}
+.chip:hover{transform:translateY(-1px)}
+.chip.zero{opacity:.4}
+.chip .e{width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,var(--c),var(--c2))}
+.chip .n{opacity:.65;font-size:.76rem;font-weight:800}
+.chip.on{background:linear-gradient(135deg,var(--c),var(--c2));color:#fff;border-color:transparent;box-shadow:0 6px 16px color-mix(in srgb,var(--c) 40%,transparent)}
+.chip.on .e{background:#fff}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0 16px}
+.row label{font-size:.85rem;color:var(--muted);display:flex;gap:6px;align-items:center;font-weight:700}
+select{font:inherit;font-size:.85rem;font-weight:700;background:var(--surface);color:var(--text);border:1.5px solid var(--line);border-radius:999px;padding:6px 10px}
+.progress{height:12px;background:var(--surface2);border-radius:99px;overflow:hidden;display:flex;box-shadow:inset 0 1px 3px rgba(0,0,0,.08)}
+.progress i{display:block;height:100%;transition:width .4s}
+.pstats{display:flex;gap:16px;font-size:.84rem;color:var(--muted);margin:8px 0 18px;flex-wrap:wrap;font-weight:700}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:middle}
+
+/* Karte mit Flip */
+.flip{perspective:1600px;cursor:pointer;outline:none}
+.flip:focus-visible .face{outline:3px solid var(--accent);outline-offset:3px}
+.face{transition:transform .18s ease-in}
+.face.turn{transform:rotateY(90deg)}
+.face.turn-in{transform:rotateY(-90deg);transition:none}
+.face{border-radius:22px;box-shadow:var(--shadow);min-height:360px;display:flex;flex-direction:column}
+.front{--c:var(--t-all);--c2:var(--t-all2);background:radial-gradient(circle at 100% 0%,rgba(255,255,255,.16) 0 130px,transparent 131px),radial-gradient(circle at 0% 100%,rgba(255,255,255,.10) 0 95px,transparent 96px),linear-gradient(140deg,var(--c),var(--c2));color:#fff;padding:22px 24px 20px}
+.front .q{font-size:1.45rem;font-weight:800;line-height:1.35;margin:auto 0;padding:18px 0;text-wrap:balance}
+.front .hint{text-align:center;font-size:.82rem;opacity:.9;font-weight:700}
+.back{--c:var(--t-all);--c2:var(--t-all2);background:var(--surface);border-top:8px solid var(--c);padding:18px 22px 20px}
+.back .qs{font-weight:800;font-size:1rem;color:var(--c2);margin:6px 0 10px;line-height:1.35}
+:root[data-theme="dark"] .back .qs{color:var(--c)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .back .qs{color:var(--c)}}
+.meta{display:flex;justify-content:space-between;gap:8px;font-size:.78rem;flex-wrap:wrap;align-items:center}
+.topic{font-weight:800;letter-spacing:.04em;text-transform:uppercase;font-size:.72rem;display:inline-flex;align-items:center;gap:6px}
+.back .topic{color:var(--muted)}
+.ico{font-size:1rem}
+.tag{border-radius:999px;padding:2px 9px;font-weight:800;font-size:.72rem;border:1.5px solid currentColor;white-space:nowrap}
+.tag.kurs{color:var(--kurs)} .tag.cs{color:var(--cs)} .tag.fall{color:var(--fall)} .tag.calc{color:var(--calc)} .tag.allg{color:var(--allg)}
+.front .tag{background:rgba(255,255,255,.95);border-color:transparent}
+.front .tag.kurs{color:#0f766e} .front .tag.cs{color:#1d4ed8} .front .tag.fall{color:#7e22ce} .front .tag.calc{color:#15803d} .front .tag.allg{color:#c2410c}
+.badge{font-size:.7rem;border-radius:999px;padding:2px 8px;background:var(--accent-soft);color:var(--accent);font-weight:800;margin-right:4px;text-transform:none;letter-spacing:0}
+.badge.w{background:var(--surface2);color:var(--muted)}
+.front .badge{background:rgba(255,255,255,.25);color:#fff}
+.status{font-size:.74rem;font-weight:800;border-radius:999px;padding:2px 8px}
+.status.ok{background:var(--ok-soft);color:var(--ok)} .status.no{background:var(--warn-soft);color:var(--warn)}
+.front .status{background:rgba(255,255,255,.95)}
+.front .status.ok{color:#15803d} .front .status.no{color:#c2410c}
+.a{font-size:.98rem}
+.a p{margin:0 0 8px}
+.a ul,.a ol{margin:0 0 8px;padding-left:22px}
+.a li{margin:3px 0}
+.a li::marker{color:var(--c);font-weight:800}
+.a b{color:inherit}
+.a table{border-collapse:separate;border-spacing:0;font-size:.86rem;margin:6px 0 10px;width:100%;display:block;overflow-x:auto;border-radius:10px}
+.a th,.a td{border-bottom:1px solid var(--line);padding:6px 9px;text-align:left;vertical-align:top}
+.a th{background:color-mix(in srgb,var(--c) 14%,var(--surface));font-weight:800}
+.f{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:color-mix(in srgb,var(--c) 9%,var(--surface2));border-left:4px solid var(--c);border-radius:10px;padding:9px 12px;display:block;margin:6px 0 10px;font-size:.86rem;white-space:pre-wrap;overflow-x:auto}
+code{font-family:ui-monospace,Menlo,Consolas,monospace;background:var(--surface2);border-radius:5px;padding:0 5px;font-size:.88em}
+.merk{background:linear-gradient(135deg,color-mix(in srgb,var(--c) 16%,var(--surface)),color-mix(in srgb,var(--c2) 10%,var(--surface)));border-radius:12px;padding:9px 12px;font-size:.93rem;margin-bottom:12px;display:flex;gap:8px;align-items:flex-start}
+.merk .mi{font-size:1.15rem;line-height:1.2}
+.trap{background:var(--warn-soft);border-left:4px solid var(--warn);padding:8px 12px;border-radius:10px;font-size:.88rem;margin-top:10px}
+.trap b:first-child{color:var(--warn)}
+.nav{display:flex;gap:8px;justify-content:space-between;align-items:center;margin-top:18px;flex-wrap:wrap}
+.nav .grp{display:flex;gap:8px}
+.rate-ok{background:linear-gradient(135deg,#22c55e,#15803d);border-color:transparent;color:#fff}
+.rate-no{background:linear-gradient(135deg,#fb923c,#c2410c);border-color:transparent;color:#fff}
+.rate-ok:hover,.rate-no:hover{border-color:transparent}
+.counter{font-size:.86rem;color:var(--muted);font-weight:800}
+.legend{margin-top:30px;font-size:.85rem;color:var(--muted);background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:14px 16px}
+.legend b{color:var(--text)}
+.legend ul{margin:8px 0 0;padding-left:18px}
+.legend li{margin:4px 0}
+.kbd{font-size:.78rem;color:var(--muted);margin-top:12px;text-align:center}
+.empty{padding:40px;text-align:center;color:var(--muted);background:var(--surface);border-radius:22px}
+.list .item{--c:var(--t-all);--c2:var(--t-all2);background:var(--surface);border-radius:16px;border-left:6px solid var(--c);padding:14px 16px;margin-bottom:12px;box-shadow:0 2px 8px rgba(60,30,120,.06)}
+.list .item .qs{font-weight:800;font-size:1.02rem;margin:6px 0 8px;color:var(--text)}
+.list .item .topic{color:var(--muted)}
+@media (max-width:520px){.face{min-height:330px}.front{padding:18px 16px}.back{padding:16px 15px}.front .q{font-size:1.22rem}header h1{font-size:1.6rem}}
+@media (prefers-reduced-motion: reduce){.face,.btn,.chip,.progress i{transition:none}}
+@media print{body{background:#fff}.chips,.row,.nav,.kbd,.progress,.pstats,.top .btn{display:none}.list .item{break-inside:avoid;box-shadow:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>Lernkarten Modul 3</h1>
+      <p>Prozessanalyse und KPIs · abgeglichen mit Kapiteltexten Tag 1 bis 4 und Glossar · Pareto, Ursachen, KPIs, Wertstrom, ROI, Reife, Score-Modell, Pitch, Fälle Schmidt und Wagner</p>
+    </div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap">
+      <button class="btn own-btn" id="ownBtn">＋ Eigene Inhalte</button>
+      <button class="btn" id="viewBtn">Listenansicht</button>
+      <button class="btn" id="themeBtn">Hell/Dunkel</button>
+    </div>
+  </header>
+  <section class="panel" id="ownPanel" hidden>
+    <div class="ph"><h2>Eigene Themen und Karten</h2><button class="btn" id="ownClose">Schließen</button></div>
+    <p class="warn" id="ownWarn">Deine Ergänzungen werden <b>nur in diesem Browser</b> gespeichert. Browserdaten löschen, privates Fenster oder ein anderes Gerät = weg. Sichere sie deshalb mit <b>Export</b> oder <b>„HTML mit meinen Inhalten speichern“</b>.</p>
+    <div class="pgrid">
+      <form id="topicForm" class="box">
+        <h3>Neues Thema</h3>
+        <label>Name<input id="tName" required maxlength="40" placeholder="z. B. Lean-Begriffe"></label>
+        <div class="two"><label>Farbe<input id="tColor" type="color" value="#0891b2"></label><label>Icon (Emoji)<input id="tIcon" maxlength="4" value="⭐"></label></div>
+        <button class="btn primary" type="submit">Thema anlegen</button>
+      </form>
+      <form id="cardForm" class="box">
+        <h3>Neue Karte</h3>
+        <label>Thema<select id="cTopic"></select></label>
+        <label>Frage (Vorderseite)<input id="cQ" required maxlength="300"></label>
+        <label>Antwort (Rückseite)<textarea id="cA" required rows="4" placeholder="Zeilenumbrüche bleiben erhalten. **fett** wird fett, Zeilen mit „- “ werden Aufzählung."></textarea></label>
+        <label>Merkbild (optional)<input id="cM" maxlength="300"></label>
+        <label>Falle/Hinweis (optional)<input id="cT" maxlength="400"></label>
+        <button class="btn primary" type="submit" id="cSubmit">Karte speichern</button>
+        <button class="btn" type="button" id="cCancel" hidden>Bearbeiten abbrechen</button>
+      </form>
+    </div>
+    <div class="box">
+      <h3>Meine Inhalte</h3>
+      <div id="ownList"></div>
+      <div class="io">
+        <button class="btn" id="expBtn">⬇ Export (JSON)</button>
+        <label class="btn" for="impFile">⬆ Import (JSON)</label><input id="impFile" type="file" accept=".json,application/json" hidden>
+        <button class="btn" id="htmlBtn">💾 HTML mit meinen Inhalten speichern</button>
+      </div>
+      <p class="pmsg" id="ownMsg" role="status"></p>
+    </div>
+  </section>
+
+  <div class="search">
+    <span class="si">🔎</span>
+    <input id="q" type="search" placeholder="Suchen: Begriff, Formel, Firma … (Taste /)" autocomplete="off" aria-label="Lernkarten durchsuchen">
+    <button class="sx" id="qx" aria-label="Suche leeren" hidden>✕</button>
+  </div>
+  <div class="shint" id="shint" hidden></div>
+  <div class="chips" id="chips"></div>
+  <div class="row">
+    <label>Anzeigen
+      <select id="filterSel">
+        <option value="all">alle Karten</option>
+        <option value="open">noch nicht gewusst</option>
+        <option value="no">nur „nochmal“</option>
+        <option value="sc">nur Selbstcheck-Fragen</option>
+        <option value="pflicht">ohne „Weiterlesen“</option>
+      </select>
+    </label>
+    <label>Quelle
+      <select id="srcSel">
+        <option value="all">alle</option>
+        <option value="kurs">Kurstext/Glossar</option>
+        <option value="own">Eigene Karte</option>
+        <option value="cs">Cheat-Sheet</option>
+        <option value="fall">Fall Schmidt/Wagner</option>
+        <option value="calc">eigene Rechnung</option>
+        <option value="allg">nicht aus Kursquelle</option>
+      </select>
+    </label>
+    <button class="btn" id="shuffleBtn">Mischen</button>
+    <button class="btn" id="resetBtn">Fortschritt zurücksetzen</button>
+  </div>
+  <div class="progress" id="bar"></div>
+  <div class="pstats" id="pstats"></div>
+
+  <div id="deck"></div>
+  <div id="list" class="list" hidden></div>
+
+  <div class="legend">
+    <b>Quellen-Markierung auf jeder Karte</b>
+    <ul>
+      <li><span class="tag kurs">Kurstext/Glossar</span> aus den Kapiteltexten Tag 1 bis 4 und dem Glossar. Sätze mit „eigene Ergänzung“ stammen nicht aus dem Kurs.</li>
+      <li><span class="badge">✔ Selbstcheck</span> wörtliche Selbstcheck-Frage aus dem Kapitel. <span class="badge w">📖 Weiterlesen</span> laut Kurs kein Pflichtstoff.</li>
+      <li><span class="tag own">Eigene Karte</span> von dir selbst angelegt (Button „＋ Eigene Inhalte“).</li>
+      <li><span class="tag cs">Cheat-Sheet</span> wörtlich oder sinngemäß aus den M03-Cheat-Sheets.</li>
+      <li><span class="tag fall">Fall</span> aus deinen Ergebnissen A01/A02 (Schmidt, Wagner). Dort mit (A) markierte Werte sind Annahmen ohne Beleg.</li>
+      <li><span class="tag calc">Eigene Rechnung</span> aus den Cheat-Sheet-Daten nachgerechnet, nicht als Musterlösung vom Kurs bestätigt.</li>
+      <li><span class="tag allg">Nicht aus Kursquelle</span> allgemeines Fachwissen, im Kursmaterial nicht belegt.</li>
+    </ul>
+  </div>
+</div>
+
+<script type="application/json" id="embedded-custom">null</script>
+<script>
+const TOPICS = {
+  grund:"Grundbegriffe", pareto:"Pareto", ursache:"Ishikawa & 5-Why", kpi:"KPI & Steckbrief",
+  wert:"Wertstrom & PCE", roi:"ROI", reife:"Reife & Daten", score:"Score-Modell", pitch:"Pitch", fall:"Fälle Schmidt & Wagner", flash:"Flashcards (Kurs)", sum:"Modul-Zusammenfassung"
+};
+const ICON={grund:"📘",pareto:"📊",ursache:"🐟",kpi:"🎯",wert:"🔄",roi:"💶",reife:"🪜",score:"🏆",pitch:"🎤",fall:"🏢",flash:"🃏",sum:"🧭"};
+const SRC = {own:"Eigene Karte", kurs:"Kurstext/Glossar", cs:"Cheat-Sheet", fall:"Fall A01/A02", calc:"Eigene Rechnung", allg:"Nicht aus Kursquelle"};
+
+const CARDS = [
+/* ---------- Grundbegriffe ---------- */
+{t:"grund",s:"allg",q:"Was ist ein Prozess (im Sinne der Prozessanalyse)?",
+ a:`<p>Eine wiederkehrende Folge von Tätigkeiten mit definiertem Auslöser (Input) und Ergebnis (Output) für einen Kunden (intern oder extern).</p><p>Beispiel Wagner: Auslöser „Bedarf in der Filiale“, Ergebnis „Ware in der Filiale“.</p>`},
+{t:"grund",s:"kurs",sc:"Tag 2",q:"Was unterscheidet eine Kennzahl von einem KPI?",
+ a:`<p>Eine <b>Kennzahl</b> misst irgendetwas. Ein <b>KPI</b> (Key Performance Indicator) misst gezielt etwas, das <b>für ein Ziel entscheidend</b> ist.</p><p>Glossar: KPI = ziel-entscheidende Kennzahl aus einer der fünf Dimensionen (Geschwindigkeit, Qualität, Kosten, Volumen, Verlust).</p>`},
+{t:"grund",s:"allg",q:"Was ist ein Wertstrom (Value Stream Map)?",
+ a:`<p>Darstellung aller Schritte vom Auslöser bis zum Ergebnis, je Schritt mit Bearbeitungszeit, Wartezeit, Fehlerquote und Menge. Ziel: Verschwendung (vor allem Warten) sichtbar machen.</p><p>Ist-Wertstrom = heute, Soll-Wertstrom = nach den 8 Gestaltungsrichtlinien. Im Kurs ist der Ausgangspunkt deine fertige Wertstromkarte aus Modul 2 (Kurstext Tag 3).</p>`},
+{t:"grund",s:"kurs",q:"Was ist die 5-Why-Methode?",
+ merk:`Das bohrende Kind, das fünfmal warum fragt, bis der wahre Grund auf dem Tisch liegt.`,
+ a:`<p>Wiederholtes Nachfragen <b>entlang einer Ursache-Kette</b>. Meist reichen etwa <b>fünf Runden</b> bis zur <b>Grundursache</b>.</p><p>Im Ishikawa-Ablauf ist sie Schritt 5: angewendet auf den wahrscheinlichsten Ast.</p>`,
+ trap:`Abbrechen, sobald eine Person als Ursache dasteht („Mitarbeiter hat Fehler gemacht“). Weiterfragen: Warum konnte der Fehler passieren? (Diese Falle ist eigene Ergänzung, nicht aus dem Kurstext.)`},
+{t:"grund",s:"allg",q:"Was ist ein Score-Modell?",
+ a:`<p>Ein Bewertungsraster: mehrere Kriterien, je Kriterium eine Skala mit festen Ankern (hier 1 bis 5) und Gewichten. Gewichtete Summe ergibt die Rangfolge.</p><p>Nutzen: Die Entscheidung wird nachvollziehbar und angreifbar, statt Bauchgefühl.</p>`},
+{t:"grund",s:"allg",q:"Wie hängen Modul 3 und Modul 4 zusammen?",
+ a:`<p>Die Top-3-Liste ist der <b>Output von Modul 3</b> und der <b>Startpunkt von Modul 4</b>: Dort prüfst du, welcher Kandidat KI-tauglich ist, und baust für einen davon einen KI-Workflow.</p><p>Schwache Liste = Use Case, der nichts spart.</p>`, s2:"Quelle: Aufgabentext A02"},
+
+/* ---------- Pareto ---------- */
+{t:"pareto",s:"cs",q:"Welche Mindest-Stichprobe braucht ein Pareto-Diagramm?",
+ a:`<p><b>100 Datensätze</b> als Mindestgröße. <b>Unter 50</b> ist Pareto unverlässlich, weil ein einzelner Ausreißer die Verteilung kippt.</p>`},
+{t:"pareto",s:"cs",q:"Nenne die 6 Daumenregeln für saubere Pareto-Diagramme.",
+ a:`<ol><li>Mindestens 100 Datensätze (unter 50 unverlässlich)</li><li>Absteigend sortieren, bevor du plottest</li><li>Kumulierte Prozentlinie auf <b>Sekundär-Y-Achse</b></li><li>80-%-Linie immer einzeichnen</li><li>Aggregationsebene prüfen</li><li>Zwei Dimensionen vergleichen: Häufigkeit <b>und</b> Euro-Summe</li></ol>`},
+{t:"pareto",s:"cs",q:"Welche Aggregationsebene passt für Pareto, welche eher nicht?",
+ a:`<p>Meistens richtig: <b>Schadensart</b> (Fehlerart, Ursachenkategorie).</p><p>Selten sinnvoll: „Mitarbeiter X“ oder „Tag der Woche“, weil die Verteilung zu flach wird.</p>`},
+{t:"pareto",s:"cs",q:"Warum Pareto auf zwei Dimensionen (Häufigkeit und Euro-Summe)?",
+ a:`<p>Die beiden Top-Listen unterscheiden sich, und beide sind relevant.</p><p>Beispiel Schmidt: Falschauslieferungen sind 27 % der Fälle, aber nur 10 % der Schadenssumme. Transport/Übergabe an Subunternehmer ist 104 von 200 Fällen und 75 % der Summe.</p>`},
+{t:"pareto",s:"cs",q:"Pandas: Wie berechnest du die kumulierte Prozentspalte?",
+ a:`<code class="f">agg = df['schadensart'].value_counts().reset_index()
+agg.columns = ['schadensart', 'anzahl']
+agg = agg.sort_values('anzahl', ascending=False)
+agg['kumuliert_proz'] = agg['anzahl'].cumsum() / agg['anzahl'].sum() * 100</code><p>CSV deutsch einlesen: <code>sep=';', decimal=','</code>.</p>`},
+{t:"pareto",s:"cs",q:"Pandas/Matplotlib: Wie bekommst du die kumulierte Linie auf eine zweite Achse und die 80-%-Linie?",
+ a:`<code class="f">ax2 = ax1.twinx()
+ax2.plot(agg['schadensart'], agg['kumuliert_proz'], marker='o')
+ax2.axhline(80, linestyle='--')</code><p><code>twinx()</code> = Sekundär-Y-Achse, <code>axhline(80)</code> = 80-%-Linie.</p>`},
+{t:"pareto",s:"kurs",q:"Was besagt das Pareto-Prinzip (80/20)?",
+ merk:`In jeder Kiste stecken ein paar Teile, die fast den ganzen Wert ausmachen.`,
+ a:`<p>Eine kleine Zahl von Ursachen (grob <b>20 %</b>) erklärt den Großteil der Wirkung (grob <b>80 %</b>).</p><p>Die Zahlen sind eine <b>Faustregel, kein Naturgesetz</b>.</p>`},
+{t:"pareto",s:"kurs",sc:"Tag 1",q:"Was sagt die 80/20-Regel, und wie nutzt du sie im Pareto-Diagramm?",
+ a:`<p>Rund <b>80 % der Wirkung</b> kommen aus <b>20 % der Ursachen</b> (Glossar: wenige Ursachen, große Wirkung).</p><p>Im Pareto-Diagramm sortierst du Fehlerarten nach Häufigkeit (absteigend) und findest die <b>wenigen mit dem größten Hebel</b>: die Ursachen, bis zu denen die kumulierte Linie die 80-%-Marke reißt.</p>`},
+{t:"pareto",s:"kurs",q:"Pareto Schritt 1: Wie zählst du die Häufigkeit?",
+ merk:`Eine Strichliste, wie oft jede Ursache vorkommt.`,
+ a:`<p>Pro Kategorie die <b>Anzahl der Fälle zählen</b>, dann <b>absteigend sortieren</b>, die häufigste oben.</p>`},
+{t:"pareto",s:"kurs",q:"Pareto Schritt 2: Was sind kumulierte Prozente und wozu brauchst du sie?",
+ merk:`Ein Kassenzettel, der mitläuft und aufaddiert.`,
+ a:`<p>Zeile für Zeile die Anteile <b>aufsummieren</b>. So siehst du, ab welcher Ursache du die <b>80-%-Marke reißt</b>.</p><code class="f">kumuliert_i = (Summe Anzahl Zeile 1 bis i) / Gesamtzahl × 100</code>`},
+{t:"pareto",s:"kurs",q:"Woraus besteht ein Pareto-Diagramm?",
+ merk:`Balken zeigen die Brocken, die Linie zeigt, wie schnell sich der Berg auftürmt.`,
+ a:`<ul><li><b>Balken</b>: Häufigkeit je Ursache (absteigend)</li><li><b>Linie</b>: kumulierte Prozente (auf Sekundär-Achse, laut Cheat-Sheet)</li><li><b>80-%-Marke</b> als Hilfslinie</li></ul>`},
+{t:"pareto",s:"kurs",q:"Was ist die ABC-Klassifizierung und wie ergänzt sie Pareto?",
+ merk:`A ist der Chef-Kram, B das Mittelfeld, C die Kleinigkeiten.`,
+ a:`<p><b>A</b> = die wenigen Ursachen mit dem großen Anteil: <b>zuerst anpacken</b>. <b>B</b> und <b>C</b> folgen.</p><p>Kapitel 1: A = wichtig/wenige, C = unwichtig/viele.</p>`,
+ trap:`B und C <b>nicht wegwerfen</b>, nur später dran. Feste Prozentgrenzen für A/B/C nennt der Kurs nicht.`},
+
+/* ---------- Ursachen ---------- */
+{t:"ursache",s:"kurs",q:"Was ist ein Ishikawa-Diagramm (Fischgräten-Diagramm)?",
+ merk:`Ein Fisch, dessen Kopf das Problem ist und dessen Gräten die möglichen Ursachen-Familien sind.`,
+ a:`<p>Ein <b>Ursache-Wirkungs-Diagramm</b>, das mögliche Ursachen <b>strukturiert sammelt, bevor man sich auf eine festlegt</b>.</p><p>Glossar: Ursachen-Strukturbaum (6M).</p>`},
+{t:"ursache",s:"kurs",q:"Wozu dienen die 6 M?",
+ merk:`Sechs Schubladen, in die jede denkbare Ursache einsortiert wird.`,
+ a:`<p>Mensch, Maschine, Material, Methode, Mitwelt, Messung: die klassischen Kategorien, <b>damit keine Ursachen-Familie vergessen wird</b>.</p>`},
+{t:"ursache",s:"kurs",q:"Grundursache oder Symptom: Was ist der Unterschied?",
+ merk:`Nicht den Boden aufwischen, sondern das Loch im Rohr finden.`,
+ a:`<p>Das <b>Symptom</b> ist, was du siehst. Die <b>Grundursache</b> ist das, was du verändern musst, <b>damit es nicht wiederkommt</b>.</p><p>Beispiel (eigenes, Wagner): Symptom = falsche Mengen in der Filiale; Grundursache = Bestellung läuft über Telefon und Zettel ohne Standard.</p>`},
+{t:"ursache",s:"kurs",q:"Was ist ein Verdachts-Ast?",
+ merk:`Die eine Gräte, die du im Diagramm dick anmalst.`,
+ a:`<p>Die Ursachen-Zweige, die du für die <b>wahrscheinlichsten</b> hältst und als Nächstes <b>mit Daten prüfst</b>.</p><p>Im Ablauf: Schritt 4 (wahrscheinliche Äste markieren), danach 5-Why auf diesem Ast.</p>`},
+{t:"ursache",s:"cs",q:"Nenne die 6 M des Ishikawa-Diagramms mit je einem Beispiel.",
+ a:`<ol><li><b>Mensch</b>: Qualifikation, Motivation, Erfahrung, Aufmerksamkeit</li><li><b>Maschine</b>: Geräte, Software, Tools, deren Zustand</li><li><b>Material</b>: Eingangsdaten, Belege, Rohstoffe, deren Qualität</li><li><b>Methode</b>: Prozessdefinition, Standards, Anweisungen</li><li><b>Mitwelt</b>: Umfeld, Licht, Lärm, Klima, Störungen</li><li><b>Messung</b>: Wie wird geprüft, ob der Schritt ok ist? Prüflücken</li></ol>`},
+{t:"ursache",s:"cs",q:"In welcher Reihenfolge baust du ein Ishikawa-Diagramm?",
+ a:`<ol><li>Problemstatement rechts ans Ende der Hauptlinie</li><li>Sechs Hauptzweige im 60-Grad-Winkel</li><li>Pro Hauptzweig 2 bis 4 Unterzweige (Brainstorming, 20 Min. in der Gruppe)</li><li>Wahrscheinliche Äste markieren</li><li>Auf einem Ast 5-Why durchführen</li></ol>`},
+{t:"ursache",s:"cs",q:"Muss jeder der 6 Äste gefüllt werden?",
+ a:`<p>Nein. Bleibt ein Ast leer (z. B. Mitwelt im Büroprozess), nicht zwingend füllen. Nicht jedes M ist immer relevant.</p>`,
+ trap:`Äste künstlich füllen, damit das Diagramm „vollständig“ aussieht. Das verwässert die Analyse.`},
+{t:"ursache",s:"kurs",q:"Was ist der Analyse-Trichter?",
+ a:`<p>Die drei Werkzeuge von Tag 1 zusammen:</p><p><b>Pareto</b> zeigt <b>wo</b> (welches Problem zuerst). <b>Ishikawa</b> und <b>5-Why</b> zeigen <b>warum</b> (welche Grundursache).</p><p>Prinzip: erst breit sammeln, dann auf die Grundursache verdichten. Leitsatz Kapitel 1: „Ursachen finden, nicht Symptome“.</p>`},
+{t:"ursache",s:"kurs",sc:"Tag 1",q:"Nenne drei der 6M-Kategorien.",
+ a:`<p>Drei aus: <b>Mensch, Maschine, Material, Methode, Mitwelt, Messung</b>.</p><p>Glossar: Ishikawa = Ursachen-Strukturbaum (6M), auch Fischgräte.</p>`},
+{t:"ursache",s:"kurs",sc:"Tag 1",q:"Worin unterscheidet sich 5-Why von Ishikawa?",
+ a:`<p><b>Ishikawa</b> geht in die <b>Breite</b>: Es sammelt mögliche Ursachen strukturiert entlang von Kategorien (6M).</p><p><b>5-Why</b> geht in die <b>Tiefe</b>: Es verfolgt eine einzelne Ursachenkette, bis die Grundursache erreicht ist.</p><p>Darum kombiniert: Ishikawa findet den wahrscheinlichen Ast, 5-Why bohrt dort nach.</p>`},
+
+/* ---------- KPI ---------- */
+{t:"kpi",s:"kurs",q:"Was macht eine Kennzahl zum KPI (Spickzettel)?",
+ merk:`Die wenigen Anzeigen im Cockpit, auf die der Pilot wirklich schaut.`,
+ a:`<p>Eine Kennzahl, die einen <b>Prozess steuerbar macht</b>.</p><p>„Schlüssel“ heißt: <b>nicht alles messen, sondern das Entscheidende</b>.</p>`},
+{t:"kpi",s:"kurs",q:"Was ist ein KPI-Steckbrief und wozu dient er?",
+ merk:`Der Personalausweis einer Kennzahl.`,
+ a:`<p>Die <b>vollständige Definition</b> einer Kennzahl, <b>damit die IT genau das baut, was gemeint ist</b>.</p><p>Felder laut Spickzettel: Name, Formel, Datenquelle, Messintervall, Zielwert, Schwellwerte, Verantwortlicher.</p>`},
+{t:"kpi",s:"kurs",q:"Was ist der Unterschied zwischen Zielwert und Schwellwerten?",
+ merk:`Die Ampel: grün ist gut, gelb ist Achtung, rot ist eingreifen.`,
+ a:`<p><b>Zielwert</b> = der Sollwert. <b>Schwellwerte</b> = die Grenzen, ab denen die Kennzahl auf <b>gelb oder rot</b> springt.</p><p>Cheat-Sheet-Beispiel: Ziel Median unter 24 h; grün &lt; 24 h, gelb 24 bis 48 h, rot &gt; 48 h.</p>`},
+{t:"kpi",s:"kurs",q:"Was besagt Goodharts Gesetz?",
+ merk:`Sobald „viele Anrufe annehmen“ belohnt wird, legt das Team schnell auf.`,
+ a:`<p>Sobald eine Kennzahl <b>zum Ziel wird</b>, hört sie auf, ein guter Maßstab zu sein, weil Menschen <b>die Zahl optimieren statt die Sache dahinter</b>.</p><p>Gegenmittel im Kurs: das Feld <b>Anti-Falle</b> im Steckbrief und ein KPI-Set über mehrere Dimensionen.</p>`},
+{t:"kpi",s:"kurs",q:"Warum ist die Aggregationsebene einer KPI wichtig?",
+ merk:`Der Durchschnitt über die ganze Firma verwischt, was in der einen Filiale brennt.`,
+ a:`<p>Die Ebene, auf der du misst (<b>gesamt, Team, Prozess-Schritt</b>), entscheidet, ob die Zahl noch etwas aussagt.</p><p>Verwandt: Pareto-Regel 5 (Aggregationsebene prüfen) und Stakeholder-Konflikt 1 (Land- vs. Stadtfiliale).</p>`},
+{t:"kpi",s:"kurs",q:"Aus welchen fünf Dimensionen der Prozessleistung leitest du KPIs ab?",
+ a:`<table><tr><th>Dimension</th><th>Beispiel</th></tr><tr><td>Geschwindigkeit</td><td>Durchlaufzeit</td></tr><tr><td>Qualität</td><td>Nachbearbeitungs-Rate</td></tr><tr><td>Kosten</td><td>Personalminuten pro Vorgang</td></tr><tr><td>Volumen</td><td>Vorgänge pro Tag</td></tr><tr><td>Verlust</td><td>Ablehnungs-Quote wegen Kapazität</td></tr></table>`,
+ trap:`Merkhilfe (eigene): <b>G-Q-K-V-V</b>, „Gute Qualität kostet viel Verlust“.`},
+{t:"kpi",s:"kurs",q:"Warum soll ein KPI-Set mehrere Dimensionen abdecken?",
+ a:`<p>Damit sich die Kennzahlen <b>gegenseitig ausgleichen</b> und <b>keine Fehlanreize</b> entstehen.</p><p>Beispiel (eigenes): Wer nur Geschwindigkeit misst, bekommt schnelle, aber fehlerhafte Arbeit. Eine Qualitäts-KPI daneben hält dagegen.</p>`},
+{t:"kpi",s:"kurs",sc:"Tag 2",q:"Nenne die vier Perspektiven der Balanced Scorecard.",
+ a:`<ol><li><b>Finanzen</b></li><li><b>Kunde</b></li><li><b>Interne Prozesse</b></li><li><b>Lernen und Entwicklung</b></li></ol><p>Zweck: Einseitigkeit verhindern, indem alle vier gleichzeitig betrachtet werden.</p>`},
+{t:"kpi",s:"kurs",q:"Wofür steht SMART und ist es Pflicht?",
+ a:`<p><b>S</b>pezifisch · <b>M</b>essbar · <b>A</b>ttraktiv/akzeptiert · <b>R</b>ealistisch · <b>T</b>erminiert</p><p><b>Nicht Pflicht</b>, nur optionaler Zusatz beim Formulieren einer einzelnen Kennzahl. Den Auftrag tragen die fünf Dimensionen und ein sauberer Steckbrief.</p>`},
+{t:"kpi",s:"kurs",q:"Nenne typische Prozess-KPIs aus dem Kurstext.",
+ a:`<p>Durchlaufzeit · Bearbeitungszeit · Fehlerquote · <b>First-Pass-Yield</b> · Termintreue</p>`,
+ trap:`First-Pass-Yield = Anteil der Vorgänge, die beim ersten Durchlauf ohne Nacharbeit fertig werden. Die Definition steht nicht im Kurstext (allgemeines Fachwissen).`},
+{t:"kpi",s:"cs",sc:"Tag 2",q:"Welche Felder gehören in einen KPI-Steckbrief?",
+ a:`<p><b>Kapitel 2 (6 Felder):</b> Name, Formel, Datenquelle, Zielwert, Messintervall, Verantwortlicher. <b>Spickzettel (7):</b> zusätzlich Schwellwerte.</p><p><b>Cheat-Sheet (9 Felder):</b></p><ol><li>Name (max. 4 Worte)</li><li>Definition (1 Satz)</li><li>Formel</li><li>Datenquelle (System + Tabelle/Spalte)</li><li>Messintervall</li><li>Zielwert</li><li>Schwellwerte (Ampel)</li><li>Verantwortlicher</li><li>Anti-Falle</li></ol>`, trap:`Drei Quellen, drei Längen: Kapitel 2 nennt 6 Felder, der KPI-Spickzettel 7 (plus Schwellwerte), das Cheat-Sheet 9 (plus Definition und Anti-Falle). Kein echter Widerspruch, die längere Liste schließt die kürzeren ein. Für Aufträge die 9 Felder nehmen. `+`Merkhilfe: <b>Was</b> (Name, Definition, Formel) · <b>Woher</b> (Quelle, Intervall) · <b>Wohin</b> (Ziel, Schwellen) · <b>Wer</b> (Verantwortlicher) · <b>Was kippt</b> (Anti-Falle). Die Gruppierung ist eine eigene Merkhilfe, nicht aus dem Cheat-Sheet.`},
+{t:"kpi",s:"cs",q:"KPI-Steckbrief-Beispiel „Durchlaufzeit Auftragsannahme“: Formel, Quelle, Ziel, Schwellen?",
+ a:`<p><b>Formel</b>: Bestätigungs-Zeitstempel minus Eingangs-Zeitstempel<br><b>Quelle</b>: TMS Soloplan, Tabelle Aufträge, <code>created_at</code> und <code>confirmed_at</code><br><b>Intervall</b>: täglich plus 7-Tage-Durchschnitt<br><b>Ziel</b>: Median unter 24 h<br><b>Ampel</b>: grün &lt; 24 h, gelb 24 bis 48 h, rot &gt; 48 h<br><b>Verantwortlich</b>: Dispo-Teamleitung</p>`},
+{t:"kpi",s:"cs",q:"Was ist die „Anti-Falle“ im KPI-Steckbrief? Beispiel?",
+ a:`<p>Die Verhaltensverzerrung, die die KPI auslöst, wenn Leute auf die Zahl optimieren statt auf das Ziel.</p><p>Beispiel Durchlaufzeit: Schnell bestätigen ohne Prüfung. Gegenmittel: Plausibilitäts-Check vor <code>confirmed_at</code>.</p>`},
+{t:"kpi",s:"cs",q:"Typische Prozess-KPIs für Logistik/Spedition (Schmidt)?",
+ a:`<p>Pünktliche Zustellquote · Schadenquote · Durchlaufzeit Auftragsannahme · Erstlösungsquote bei Klärfällen · Anteil Leerkilometer</p>`},
+{t:"kpi",s:"cs",q:"Typische Prozess-KPIs für Handel/Filialbetrieb (Wagner, Bergshop)?",
+ a:`<p>Retourenquote · Lagerumschlag · Out-of-Stock-Quote · Schwundquote · Liefertreue der Filialbestellung</p>`},
+{t:"kpi",s:"cs",q:"Typische Prozess-KPIs für Dienstleistung/Kanzlei/Pflege (Hoffmann, Tannenhof)?",
+ a:`<p>Bearbeitungszeit pro Vorgang · Fehlerquote bei Belegbuchung · Termintreue · Auslastungsgrad · Rückfragen-Quote pro Mandat</p>`, trap:`Branchen-KPIs sind nur Startpunkt. Immer prüfen, ob die Kennzahl zum konkreten Prozessziel passt.`},
+{t:"kpi",s:"kurs",q:"Was zeigt ein Prozess-Cockpit, und wie viele Kennzahlen gehören hinein?",
+ a:`<p>Wenige, gut gewählte Kennzahlen eines Prozesses <b>auf einen Blick</b>: <b>ein bis zwei pro Dimension</b> (Geschwindigkeit, Qualität, Kosten, Volumen, Verlust), jeweils mit <b>Zielwert, Ist-Wert und Ampel</b>.</p><p>Faustregel: <b>lieber fünf Kennzahlen, die jemand wirklich steuert, als zwanzig, die niemand liest.</b></p>`,
+ trap:`Verwandt: Bei Stakeholder-Konflikten empfiehlt das Cheat-Sheet zwei Cockpit-Ebenen (operativ täglich, strategisch quartalsweise). Und jede Kennzahl ist eine Datenpipeline, die jemand pflegen muss.`},
+{t:"kpi",s:"cs",q:"Nenne die 3 typischen Stakeholder-Konflikte in KPI-Projekten.",
+ a:`<ol><li><b>GF will Vergleichbarkeit, Operative wollen Kontext-Schutz</b> (Land- vs. Stadtfiliale)</li><li><b>Controlling will viele Zahlen, IT will Datenpflege minimieren</b> (jede KPI = neue Datenpipeline; Halbtagskraft Knecht kann keine 15 warten)</li><li><b>Strategie will langfristig, Operative wollen täglich</b> (Marktanteil je Region vs. Tagesumsatz je Filiale)</li></ol>`},
+{t:"kpi",s:"cs",q:"Welche 3 Strategien vermeiden Stakeholder-Konflikte bei KPIs?",
+ a:`<ol><li><b>Zwei Cockpit-Ebenen</b>: operatives Tages-Cockpit und Strategie-Quartals-Cockpit getrennt</li><li><b>Kontextualisierung</b>: Vergleich nur „vs. Filialen gleichen Typs“ oder „vs. eigene Historie“</li><li><b>Datenquellen-Prüfung vor Definition</b>: IT (Frau Knecht) ist in Phase 1 dabei</li></ol>`},
+
+/* ---------- Wertstrom ---------- */
+{t:"wert",s:"kurs",q:"Wie gehst du in Tag 3 vom Ist zum Soll vor?",
+ a:`<ol><li>Fertige <b>Wertstromkarte aus Modul 2</b> nehmen</li><li>An jeden Schritt <b>4 Datenpunkte</b> hängen (PT, WT, Fehlerquote, Mengenfluss)</li><li><b>Durchlaufzeit</b> und <b>PCE</b> berechnen (Gesamt und je Schritt)</li><li><b>Drei Engpass-Kandidaten</b> benennen, pro Kriterium ein anderer Schritt</li><li>Erst dann das <b>Soll</b> entwerfen (8 Gestaltungsrichtlinien)</li></ol>`},
+{t:"wert",s:"kurs",q:"Klassische Ist-Aufnahme in fünf Phasen: Welche? Brauchst du sie im Kurs?",
+ a:`<p>Scope · Daten erheben · visualisieren · messen · Schwachstellen markieren.</p><p><b>Nur Hintergrund-Framework.</b> Für den Auftrag ersetzt deine M02-Wertstromkarte dieses Schema.</p>`},
+{t:"wert",s:"kurs",q:"Wie hängt die Gesamt-PCE mit dem Wertschöpfungsanteil aus Modul 2 zusammen?",
+ a:`<p>Sie ist <b>identisch</b>:</p><code class="f">Gesamt-PCE = Σ PT / Σ (PT + WT) × 100
+M02: Wertschöpfungszeit / Gesamtdurchlaufzeit × 100</code><p>PT entspricht der Wertschöpfungszeit, Σ (PT + WT) der Durchlaufzeit.</p>`},
+{t:"wert",s:"kurs",sc:"Tag 3",q:"Welche vier Datenpunkte hängst du an jeden Schritt der Ist-Wertstromkarte?",
+ a:`<ul><li><b>PT</b> (Process Time): Dauer der eigentlichen Bearbeitung</li><li><b>WT</b> (Wait Time): Liegezeit zwischen Schritten</li><li><b>Fehlerquote</b>: Wie oft muss wiederholt werden?</li><li><b>Mengenfluss</b>: Einheiten pro Bearbeitung</li></ul>`},
+{t:"wert",s:"cs",q:"Formel Schritt-PCE und Gesamt-PCE?",
+ a:`<code class="f">Schritt-PCE = PT / (PT + WT) × 100        (je Schritt einzeln)
+Gesamt-PCE  = Σ PT / Σ (PT + WT) × 100    (einmal über alle Schritte)</code><p>PCE = Process Cycle Efficiency: Anteil wertschöpfender Zeit an der Durchlaufzeit.</p>`,
+ trap:`Gesamt-PCE ist <b>zeitgewichtet</b> und <b>nicht</b> der Mittelwert der Schritt-PCEs. Lange schwache Schritte ziehen sie nach unten.`},
+{t:"wert",s:"cs",q:"PCE-Faustregel: Welche Werte sind typisch?",
+ a:`<table><tr><th>Bereich</th><th>PCE</th></tr><tr><td>Büroprozesse Mittelstand</td><td>5 bis 15 %</td></tr><tr><td>Optimierte Büroprozesse</td><td>25 bis 40 %</td></tr><tr><td>Industrie-Best-Practice (Lean)</td><td>50 %+</td></tr></table>`},
+{t:"wert",s:"cs",q:"Welche 3 Engpass-Kriterien prüfst du im Wertstrom?",
+ a:`<ul><li><b>Zeitfresser</b>: höchste WT</li><li><b>Qualitätsfresser</b>: höchste Fehlerquote</li><li><b>Verschwendungsfresser</b>: niedrigste Schritt-PCE</li></ul><p>Regel: pro Kriterium ein <b>anderer</b> Schritt. Ist der Schritt mit der niedrigsten PCE schon Zeitfresser, nimm den nächstniedrigsten.</p>`,
+ trap:`Nur ein Kriterium prüfen. Alle drei prüfen!`},
+{t:"wert",s:"cs",q:"Nenne die 8 Gestaltungsrichtlinien für Soll-Wertströme.",
+ a:`<ol><li>Am Kundentakt ausrichten</li><li>Kontinuierlichen Fluss erzeugen (FIFO)</li><li>Pull/Kanban statt Push</li><li>Schrittmacher-Prozess festlegen</li><li>Heijunka (Nivellierung)</li><li>Losgrößen reduzieren</li><li>Prozessschritte zusammenlegen (Verkettung)</li><li>Automatisierungspotenziale nutzen</li></ol>`},
+{t:"wert",s:"cs",q:"Büro-Übersetzung: „Am Kundentakt ausrichten“ und „Kontinuierlicher Fluss“?",
+ a:`<p><b>Takt</b>: gleichmäßiger Rhythmus statt Stoßzeiten, <b>fester Cutoff</b> statt Warten auf Nachzügler.</p><p><b>Fluss</b>: kein Bestand, keine Liegezeit zwischen Schritten; FIFO als Regel, keine Reihenfolge-Umkehr.</p>`},
+{t:"wert",s:"cs",q:"Büro-Übersetzung: „Pull statt Push“ und „Schrittmacher-Prozess“?",
+ a:`<p><b>Pull</b>: Der nächste Schritt zieht bei Bedarf (Signal, Schwellwert), der vorherige schiebt nicht auf Verdacht.</p><p><b>Schrittmacher</b>: genau EIN Punkt steuert den Takt der Kette, nicht jeder Schritt seine eigene Liste.</p>`},
+{t:"wert",s:"kurs",sc:"Tag 3",q:"Was bedeutet Pull statt Push?",
+ a:`<p>Glossar: <b>Arbeit wird gezogen statt zugeschoben</b> (Kanban, WIP-Limit).</p><p>Der nächste Schritt zieht per <b>Signal oder Schwellwert</b>, wenn er Kapazität hat. Bei Push schiebt der vorherige Schritt Arbeit auf Verdacht weiter, und es entstehen Stapel.</p>`},
+{t:"wert",s:"kurs",sc:"Tag 3",q:"Wie hilft ein WIP-Limit in der Sachbearbeitung?",
+ a:`<p>Kanban bringt das Pull-Prinzip in die Sachbearbeitung: <b>begrenzte parallele Arbeit</b> (WIP = Work in Progress). Aufgaben werden <b>gezogen statt zugeschoben</b>.</p><p>Wirkung: Neues wird erst angefangen, wenn Altes fertig ist. Das senkt Liegezeiten und Stapel.</p>`,
+ trap:`Die Wirkungserklärung (weniger Liegezeit, weniger Hin-und-her-Wechseln) ist eigene Ergänzung. Der Kurstext nennt nur „begrenzte parallele Arbeit“.`},
+{t:"wert",s:"cs",q:"Büro-Übersetzung: „Heijunka“ und „Losgrößen reduzieren“?",
+ a:`<p><b>Heijunka</b>: Mengenschwankungen glätten, statt Berge und Täler durch den Prozess zu schieben.</p><p><b>Losgrößen</b>: kleine Bündel sofort statt großer Sammelstapel (nicht „mittags alles gesammelt eingeben“, wie Wagner in Schritt 4).</p>`},
+{t:"wert",s:"cs",q:"Büro-Übersetzung: „Verkettung“ und „Automatisierung“? Welche Voraussetzung gilt?",
+ a:`<p><b>Verkettung</b>: Übergaben eliminieren, Schritte direkt verbinden oder ganz weglassen.</p><p><b>Automatisierung</b>: manuelle Übertragungen durch Schnittstellen und Workflows ersetzen.</p><p><b>Voraussetzung: Standardarbeit</b> (fester Ablauf statt Bauchgefühl).</p>`, trap:`Wer einen chaotischen Prozess automatisiert, bekommt automatisiertes Chaos. Darum Reife vor Automatisierung.`},
+{t:"wert",s:"cs",q:"Wagner-Wertstrom: Welche Schritte gehen in die PCE-Rechnung ein und warum?",
+ a:`<p>Nur <b>Schritte 1 bis 5</b> (Bedarf schätzen, Anruf, Zettel, BackOffice-Eingabe, Disposition). Jede Wartezeit zählt mit, auch die 60 Min. aus Schritt 1.</p><p>Schritt 6 (Auslieferung) liegt außerhalb des Verwaltungsprozesses, hat keine Zeitpunkte und geht <b>nicht</b> in die PCE ein.</p>`},
+{t:"wert",s:"cs",q:"Wagner-Wertstrom: PT, WT und Fehlerquote der Schritte 1 bis 5?",
+ a:`<table><tr><th>Schritt</th><th>PT</th><th>WT</th><th>Fehler</th></tr><tr><td>1 Bedarf schätzen (Berger)</td><td>8 min</td><td>60 min</td><td>15 %</td></tr><tr><td>2 Anruf an Wagner</td><td>12 min</td><td>4 h</td><td>5 %</td></tr><tr><td>3 Zettel (Wagner)</td><td>6 min</td><td>30 min</td><td>10 %</td></tr><tr><td>4 BackOffice-Eingabe</td><td>18 min</td><td>2 h</td><td>8 %</td></tr><tr><td>5 Disposition</td><td>14 min</td><td>6 h</td><td>4 %</td></tr></table>`},
+{t:"wert",s:"calc",s2:"Bestätigt durch die Kurs-Flashcard „Wertstromanalyse bei Wagner“ (58 min PT, ca. 14,5 h DLZ, PCE 6,7 %).",q:"Rechne die Gesamt-PCE des Wagner-Wertstroms (Schritte 1 bis 5).",
+ a:`<p>Σ PT = 8+12+6+18+14 = <b>58 min</b><br>Σ WT = 60+240+30+120+360 = <b>810 min</b></p><code class="f">Durchlaufzeit = Σ (PT + WT) = 868 min ≈ 14,5 h
+Gesamt-PCE = 58 / (58 + 810) × 100 = 58 / 868 ≈ 6,7 %</code><p>Liegt im Bereich „Büro Mittelstand“ (5 bis 15 %), am unteren Rand.</p>`},
+{t:"wert",s:"calc",q:"Rechne die Schritt-PCEs im Wagner-Wertstrom. Wie groß ist ihr Mittelwert im Vergleich zur Gesamt-PCE?",
+ a:`<table><tr><th>Schritt</th><th>PT/(PT+WT)</th><th>PCE</th></tr><tr><td>1</td><td>8/68</td><td>11,8 %</td></tr><tr><td>2</td><td>12/252</td><td>4,8 %</td></tr><tr><td>3</td><td>6/36</td><td>16,7 %</td></tr><tr><td>4</td><td>18/138</td><td>13,0 %</td></tr><tr><td>5</td><td>14/374</td><td>3,7 %</td></tr></table><p>Mittelwert ≈ <b>10,0 %</b>, Gesamt-PCE ≈ <b>6,7 %</b>. Genau der Effekt aus dem Cheat-Sheet: Die langen Schritte (2 und 5) sind die schwachen.</p>`},
+{t:"wert",s:"calc",q:"Wagner: Welcher Schritt ist Zeitfresser, Qualitätsfresser, Verschwendungsfresser?",
+ a:`<ul><li><b>Zeitfresser</b>: Schritt 5 Disposition (WT 6 h, wartet auf alle 8 Filialen)</li><li><b>Qualitätsfresser</b>: Schritt 1 Bedarfsschätzung (15 %)</li><li><b>Verschwendungsfresser</b>: niedrigste PCE ist Schritt 5 (3,7 %), der ist schon Zeitfresser → nächstniedrigster: <b>Schritt 2 Anruf</b> (4,8 %)</li></ul>`},
+{t:"wert",s:"calc",q:"Woher kommen die „21 % Übertragungsfehler“ bei Wagner?",
+ a:`<p>Kombinierte Fehlerquote der Übertragungsschritte 2 bis 4 (Anruf, Zettel, Eingabe):</p><code class="f">1 − (0,95 × 0,90 × 0,92) = 1 − 0,787 ≈ 21,3 %</code>`, trap:`Fehlerquoten nicht einfach addieren (5+10+8 = 23 %). Die korrekte Kombination läuft über die Gegenwahrscheinlichkeit. Herleitung ist eine eigene Rekonstruktion.`},
+
+/* ---------- ROI ---------- */
+{t:"roi",s:"kurs",q:"ROI-Grundrechnung: Wie berechnest du ROI und Amortisationszeit?",
+ a:`<code class="f">ROI (%) = (jährlicher Nutzen − jährliche Kosten) / Investition × 100
+Amortisationszeit (Jahre) = Investition / jährlicher Netto-Nutzen</code><p>Netto-Nutzen = jährlicher Nutzen minus jährliche Kosten (z. B. Wartung).</p>`},
+{t:"roi",s:"calc",q:"Kurs-Formel oder Cheat-Sheet-Formel: Wann nimmst du welche?",
+ a:`<table><tr><th></th><th>Kurs-Grundrechnung</th><th>Cheat-Sheet</th></tr><tr><td>Ergebnis</td><td><b>Prozentzahl</b> pro Jahr + Amortisation in <b>Jahren</b></td><td><b>Euro-Betrag</b> nach Monat n + Break-even in <b>Monaten</b></td></tr><tr><td>Zeitbasis</td><td>ein Jahr, statisch</td><td>Monat für Monat, Verlauf</td></tr><tr><td>Gut für</td><td>Kandidaten vergleichen, Score-Kriterium ROI, eine Zahl für den Pitch</td><td>Zeigen, <b>wann</b> sich etwas rechnet, schnelle Quick Wins, Verlaufskurve</td></tr></table><p>Beide rechnen mit demselben Netto-Nutzen. Break-even-Monat = Amortisationszeit in Jahren × 12.</p>`,
+ trap:`Die Cheat-Sheet-Größe „ROI_kumuliert“ ist streng genommen <b>kein ROI</b> (keine Quote), sondern der kumulierte Netto-Gewinn in Euro. Im Gespräch nicht beide „ROI“ nennen, sonst vergleicht jemand Prozent mit Euro. Diese Abgrenzung ist meine Einordnung, sie steht so nicht im Kurs.`},
+{t:"roi",s:"calc",q:"Übung: Wagner-Bestellung mit der Kurs-Grundrechnung (Invest 4.920 €, Nutzen 6.200 €/Monat, Wartung 15 %/Jahr).",
+ a:`<code class="f">Nutzen/Jahr  = 6.200 × 12        = 74.400 €
+Kosten/Jahr  = 4.920 × 0,15      =    738 €
+Netto/Jahr                        = 73.662 €
+ROI          = 73.662 / 4.920 × 100 ≈ 1.497 %
+Amortisation = 4.920 / 73.662   ≈ 0,07 Jahre ≈ 0,8 Monate</code><p>Gleiches Ergebnis wie der Break-even nach Cheat-Sheet-Formel (≈ 0,8 Monate).</p>`,
+ trap:`Ein ROI von fast 1.500 % klingt unseriös und lädt Skeptiker ein. Der Nutzen ist Zeitwert (Chef-Zeit), kein Geld auf dem Konto, und die 4,8 h/Tag sind noch nicht per Strichliste belegt. Im Pitch lieber „Break-even unter 2 Monaten“ sagen.`},
+{t:"roi",s:"cs",q:"Standard-Formel für den kumulierten ROI und den Break-Even-Monat?",
+ a:`<code class="f">ROI_kum(n) = −Investition + (Ersparnis/Monat − Wartung/Monat) × n
+Break-Even-Monat = Investition / (Ersparnis/Monat − Wartung/Monat)</code>`},
+{t:"roi",s:"cs",q:"Nenne die 5 Annahmen-Klassen der ROI-Rechnung mit dem jeweiligen Anfängerfehler.",
+ a:`<table><tr><th>Klasse</th><th>Anfängerfehler</th><th>Richtig</th></tr><tr><td>Stundensatz</td><td>Bruttolohn</td><td>Vollkosten = Brutto × 1,4 bis 1,8</td></tr><tr><td>Volumen</td><td>Maximum</td><td>Median/Ø der letzten 6 Monate</td></tr><tr><td>Fehlerkosten</td><td>ignoriert</td><td>Ø Schadenshöhe × Fehlerquote + Behebungsaufwand</td></tr><tr><td>Implementierung</td><td>optimistisch</td><td>Schätzung × 2, plus 15 bis 20 % Puffer</td></tr><tr><td>Wartung</td><td>vergessen</td><td>10 bis 20 % der Investition pro Jahr</td></tr></table>`},
+{t:"roi",s:"cs",q:"Was gehört in den Vollkosten-Stundensatz, und mit welchem Faktor rechnest du?",
+ a:`<p>Bruttolohn × <b>1,4 bis 1,8</b>: Lohnnebenkosten, Sozialversicherung, Arbeitsplatz, Geräte.</p>`},
+{t:"roi",s:"cs",q:"Welche Vollkosten-Stundensätze gelten im Fall Wagner?",
+ a:`<p>Filialleiterin Berger <b>28 €/h</b> · Stefan Wagner (GF) <b>65 €/h</b> · Disposition <b>32 €/h</b> · Frau Knecht (IT) <b>38 €/h</b></p>`},
+{t:"roi",s:"calc",q:"Wagner-Mengengerüst: Wie viele Hauptbestellungen pro Jahr?",
+ a:`<code class="f">8 Filialen × 6 Werktage × 48 Wochen × 1 Bestellung = 2.304 / Jahr</code><p>Nachbestellungen bewusst nicht mitgerechnet (konservatives Volumen).</p>`},
+{t:"roi",s:"fall",q:"A02: Wie wurde die Investition für Wagners digitale Bestellung angesetzt?",
+ a:`<code class="f">2.050 € (Orga-Stufe) × 2 (Verdopplung) × 1,2 (20 % Puffer) = 4.920 €</code><p>Ersparnis ≈ 32,27 € je Bestellung × 2.304 / 12 ≈ <b>6,2 T€ pro Monat Zeitwert</b>.</p>`, trap:`Zeitwert ist kein Geld auf dem Konto. Freie Chef-Zeit spart nur, wenn sie anders genutzt wird. Offen: ob die 2.050 € schon verdoppelt waren.`},
+{t:"roi",s:"calc",q:"Übung: Investition 4.920 €, Ersparnis 6.200 €/Monat, Wartung 15 %/Jahr. Break-Even?",
+ a:`<code class="f">Wartung = 4.920 × 0,15 / 12 ≈ 61,50 €/Monat
+Break-Even = 4.920 / (6.200 − 61,50) ≈ 0,8 Monate</code><p>Also unter einem Monat, passend zu „&lt; 2 Monate Break-even“ in A02.</p>`},
+{t:"roi",s:"fall",q:"Warum ist die IT-Stufe (KI-Prognose) bei Wagner kritisch?",
+ a:`<p>26.700 € Investition, Break-even 19 bis 22 Monate bei 24 Monaten Betrachtung: kaum Puffer. Und ohne erfasste Bestellungen, Abverkäufe oder Abschriften hat eine Prognose keine Lerndaten.</p>`},
+
+/* ---------- Reife & Daten ---------- */
+{t:"reife",s:"kurs",q:"Was bewerten Reifegradmodelle, und woher kommt der Reife-Score im Kurs?",
+ a:`<p>Reifegradmodelle bewerten, <b>wie systematisch ein Prozess gesteuert wird</b>.</p><p>Herkunft ist <b>CMMI</b> mit fünf Stufen von <b>1 (chaotisch/ad hoc)</b> bis <b>5 (optimierend)</b>. Im Kurs nutzt du einen daraus abgeleiteten <b>Reife-Score 1 bis 5</b>, direkt auf einen Prozess angewendet, ohne formale CMMI-Zertifizierung.</p>`},
+{t:"reife",s:"kurs",sc:"Tag 4",q:"Was kennzeichnet Reife-Score 4 gegenüber Score 5?",
+ a:`<p><b>Score 4 = datenbasiert gesteuert</b>: Du misst und steuerst mit Kennzahlen.</p><p><b>Score 5 = kontinuierlich verbessernd</b>: Der Prozess lernt systematisch dazu.</p><p>Kurz: 4 misst und steuert, 5 verbessert sich aus den Messungen heraus selbst.</p>`},
+{t:"reife",s:"kurs",q:"Welche Stufen des Reife-Scores beschreibt der Kurs ausdrücklich?",
+ a:`<p><b>1</b> = chaotisch/ad hoc · <b>4</b> = datenbasiert gesteuert · <b>5</b> = kontinuierlich verbessernd.</p><p>Cheat-Sheet-Anker: 1 = kein KPI-Messpunkt, 3 = CMMI Stufe 2 bis 3.</p>`,
+ trap:`<b>Widerspruch im Kursmaterial:</b> Das Score-Cheat-Sheet gibt <b>5 Punkte schon für CMMI 4+</b> („messbar verbesserbar“). Laut Kapitel 4 ist ein datenbasiert gesteuerter Prozess aber <b>Score 4</b>, erst ein kontinuierlich verbessernder Score 5. Ein Prozess mit KPI-Steuerung bekäme also je nach Quelle 4 oder 5. Meine Empfehlung: Kapitel 4 folgen und die Abweichung im Modell offen benennen.`},
+{t:"reife",s:"allg",q:"Wie heißen die fünf CMMI-Stufen im Original? (Zusatzwissen)",
+ a:`<ol><li>Initial (chaotisch/ad hoc)</li><li>Managed</li><li>Defined</li><li>Quantitatively Managed (≈ Kurs-Score 4: datenbasiert gesteuert)</li><li>Optimizing (≈ Kurs-Score 5: kontinuierlich verbessernd)</li></ol><p>Der Kurs nennt die englischen Namen nicht. Stufe 1 und 5 decken sich mit dem Kurstext.</p>`},
+{t:"reife",s:"kurs",sc:"Tag 4",q:"Was misst der Datengrundlage-Score von 1 bis 5?",
+ a:`<p>Ob ein Prozess <b>auswertbare Prozessdaten</b> liefert:</p><p><b>1</b> = nur Papier, Telefon oder Messenger<br><b>5</b> = ERP, TMS oder WMS mit <b>Zeitstempeln und Bearbeiter-Zuordnung</b></p><p>Cheat-Sheet: Ohne Datengrundlage lässt sich später nicht messen, ob die Maßnahme gewirkt hat.</p>`},
+{t:"reife",s:"kurs",q:"Software vorhanden = gute Datengrundlage?",
+ a:`<p><b>Nein.</b> Ob eine Software existiert und ob sie <b>auswertbare Prozessdaten</b> liefert, sind zwei verschiedene Dinge.</p><p>Beispiel Schmidt: WMS vorhanden, aber kein Event-Log und kein Sendungsvolumen je Sub, darum nur 2 Punkte.</p>`},
+{t:"reife",s:"kurs",sc:"Tag 4",q:"Was macht Process Mining sichtbar, was ein Pareto nicht zeigt?",
+ a:`<p>Aus den <b>Zeitstempeln der Systemlogs</b> entsteht eine <b>automatisch gezeichnete Prozess-Landkarte</b>. Sie zeigt auch <b>Schleifen und Umwege</b>.</p><p>Pareto zählt nur, <b>wie oft</b> welche Ursache vorkommt, nicht <b>welchen Weg</b> ein Vorgang nimmt.</p>`,
+ trap:`Process Mining braucht genau die Datengrundlage 5 (Zeitstempel + Bearbeiter). Bei Wagner (Datengrundlage 1) ist es heute nicht möglich.`},
+{t:"reife",s:"kurs",q:"Welche zwei Spalten aus Tag 4 übernimmst du in die Top-3-Priorisierung?",
+ a:`<p><b>Reife-Score</b> und <b>Datengrundlage</b>, beide auf der Skala 1 bis 5.</p>`},
+{t:"reife",s:"kurs",w:1,q:"Weiterlesen: Wie unterscheidet sich SPICE von CMMI?",
+ a:`<p><b>SPICE (ISO/IEC 33000)</b> bewertet <b>zweidimensional</b>: Prozess und Fähigkeitsgrad getrennt.</p><p><b>CMMI</b> gibt eine <b>Gesamtstufe</b>.</p><p>Kein Pflichtstoff für die Aufträge.</p>`},
+{t:"reife",s:"kurs",w:1,q:"Weiterlesen: Welche sechs Schritte hat eine formale Gap-Analyse?",
+ a:`<ol><li>Bewerten</li><li>Lücke bestimmen</li><li>Ziel setzen</li><li>Maßnahmen wählen</li><li>Umsetzen</li><li>Nachmessen</li></ol><p>Kein Pflichtstoff für die Aufträge.</p>`},
+{t:"reife",s:"fall",q:"Welche Regel hast du in A01 für die Datengrundlage angewendet?",
+ a:`<p><b>Event-Log-Regel</b>: Ist unklar, ob sich die Daten mit Zeitstempeln exportieren lassen, gibt es <b>maximal 2</b> Punkte.</p><p>Deshalb bekommt Schmidt trotz WMS überall nur 2 (kein Event-Log, kein Sendungsvolumen).</p>`},
+{t:"reife",s:"allg",q:"Was prüft die „Bus-Frage“ bei der Prozess-Reife?",
+ a:`<p>„Läuft der Prozess weiter, wenn die zuständige Person morgen ausfällt?“ Wenn nein, hängt er an Kopfwissen und ist niedrig reif (CMMI 1).</p><p>Wagner: Alles läuft über den GF per Telefon und Zettel, Reife 1.</p>`},
+{t:"reife",s:"fall",q:"A01-Selbstkritik: Welche Schwächen hatte das erste Score-Modell?",
+ a:`<ul><li>Belohnt Machbarkeit statt Wirkung</li><li>Reife und Daten messen fast dasselbe, werden doppelt gezählt</li><li>Abstände liegen im Rauschen</li><li>Pakete zerschnitten (Cutoff + Direktbestellung; Handling-Hinweis + Regress)</li></ul>`},
+
+/* ---------- Score-Modell ---------- */
+{t:"score",s:"cs",q:"Nenne die 5 Standard-Kriterien plus das 6. Kriterium des Score-Modells.",
+ a:`<ol><li>ROI</li><li>Risiko</li><li>Prozess-Reife</li><li>Strategie-Beitrag</li><li>Umsetzungs-Aufwand</li><li><b>+ Datengrundlage</b></li></ol><p>Skala jeweils 1 bis 5, 5 ist immer gut.</p>`},
+{t:"score",s:"cs",q:"Score-Anker ROI und Risiko (1, 3, 5)?",
+ a:`<p><b>ROI</b>: 1 fragwürdig/negativ · 3 positiv, aber niedrige Sicherheit · 5 hoch und gut belegt</p><p><b>Risiko</b>: 1 hohes Implementierungsrisiko · 3 mittel · 5 niedrig (etablierte Technologie, klare Verantwortung)</p>`},
+{t:"score",s:"cs",q:"Score-Anker Strategie-Beitrag und Umsetzungs-Aufwand (1, 3, 5)?",
+ a:`<p><b>Strategie</b>: 1 Mikro-Optimierung ohne Wettbewerbsrelevanz · 3 stützt operatives Geschäft · 5 Kern-Wettbewerbsfaktor</p><p><b>Aufwand</b>: 1 hoch (Monate, viele Stakeholder) · 3 mittel · 5 niedrig (Tage bis Wochen, wenige Personen)</p>`, trap:`Aufwand ist invertiert: 5 Punkte = <b>wenig</b> Aufwand. Gleiches gilt für Risiko.`},
+{t:"score",s:"cs",q:"Wann und wie gewichtest du ein Kriterium?",
+ a:`<p>Sind alle gleich wichtig: einfache Summe. Ist eins wichtiger: Gewicht <b>1,5× oder 2×</b>.</p><p>Cheat-Sheet-Beispiel: Risiko bei Schmidt wegen Cyber-Bedrohung höher gewichten.</p>`},
+{t:"score",s:"fall",q:"A02: Welche Gewichtung hast du gewählt und wie verteidigst du sie?",
+ a:`<p><b>ROI ×2</b>, Rest ×1, Maximum 35 Punkte.</p><p>Begründung: Die Liste ist Startpunkt für Modul 4, ein Use Case ohne Nutzen ist dort wertlos. Ohne Gewichtung zählten Reife und Daten zusammen doppelt so viel wie der Nutzen, obwohl sie fast dasselbe messen.</p><p>Risiko nicht ×1,5, weil keine Top-3-Maßnahme ein System nach außen öffnet.</p>`},
+{t:"score",s:"fall",q:"A02: Wie lautet deine Top 3 mit Score?",
+ a:`<ol><li><b>Schmidt: Regress bei jedem Transportbruch</b> 26/35, ≈ 3 T€/Monat netto (A), Sicherheits-Wette</li><li><b>Wagner: Filialbestellung digital + Bestellschluss</b> 22/35, ≈ 6 T€/Monat Zeitwert, Hauptwette</li><li><b>Wagner: Retouren/Abschriften erfassen</b> 20/35, rechnet sich ab 3 € weniger Abschrift je Filiale/Tag (A), strategische Wette</li></ol>`},
+{t:"score",s:"fall",q:"A02: Was ist die Anti-Wahl und wie begründest du sie gegen „Aber KI ist doch das Thema!“?",
+ a:`<p><b>Keine KI-Bedarfsprognose bei Wagner</b> (13/35, letzter Platz), solange Bestellungen und Abschriften auf Zettel laufen.</p><p>Eine Prognose lernt aus Daten, und die gibt es nicht. KI kommt trotzdem, dort wo Daten sind: beim Schmidt-Regress (Dokumente lesen, Schreiben vorbereiten). Platz 2 und 3 liefern in 6 bis 12 Monaten die Daten für die Prognose.</p>`},
+{t:"score",s:"fall",q:"A02: Wie wurde der Gleichstand auf Platz 3 entschieden, und ist das sauber?",
+ a:`<p>Retouren (Wagner) und Handling-Pflichtfeld (Schmidt) haben je 20 Punkte. Entschieden per <b>Diversitätsregel</b> der Aufgabe: Das Pflichtfeld wäre das zweite Schadensthema bei Schmidt.</p><p>Ehrlich: Das ist eine Regelentscheidung, kein Rechenergebnis. Platz 3 kippt je nach Gewichtung. Handling-Pflichtfeld ist erster Nachrücker.</p>`},
+{t:"score",s:"fall",q:"A02: Was ist die „Paket-Regel“?",
+ a:`<p>Bestellübermittlung und Disposition werden als <b>ein</b> Kandidat bewertet, weil der Bestellschluss das Warten der Disposition löst und die digitale Bestellung die Übertragungsfehler.</p><p>Bei Reife und Daten zählt im Paket der <b>schwächere</b> A01-Wert.</p>`},
+{t:"score",s:"fall",q:"Was ist eine Robustheits- bzw. Sensitivitätsprüfung im Score-Modell?",
+ a:`<p>Gewichte variieren (alle gleich, Risiko ×1,5, Strategie ×1,5) und prüfen, welche Plätze halten.</p><p>A02: Platz 1, Platz 2 und der letzte Platz halten in jeder Variante. Nur Platz 3 wechselt. Das ist die angreifbarste Stelle und gehört offen in den Pitch.</p>`},
+{t:"score",s:"fall",q:"Effort-Impact-Matrix aus A02: Wie wurden die Achsen gebildet?",
+ a:`<code class="f">Wirkung = 2 × ROI + Strategie       (3 bis 15)
+Aufwand = 6 − Aufwand-Score          (1 bis 5)</code><p>Befund: Regress und Wagner-Bestellung sind Quick Wins, Retouren landen bei „Kleinkram“ (Nutzen indirekt), KI-Prognose bei den Zeitfressern.</p>`},
+
+/* ---------- Pitch ---------- */
+{t:"pitch",s:"cs",q:"Standard-Struktur des 5-Minuten-Pitchs (5 Slides + 1 Bonus) mit Zeiten?",
+ a:`<ol><li>Situation (30 s)</li><li>Analyse: Was, mit welcher Methode (30 s)</li><li>Empfehlung Top 1 (60 s): Was, warum, ROI, Aufwand, Risiko</li><li>Empfehlung Top 2 (60 s)</li><li>Empfehlung Top 3 (60 s)</li><li>Bonus: Was misst du nicht? (60 s) Auslassung, Risiko, Früherkennungsweg</li></ol>`},
+{t:"pitch",s:"cs",q:"Nenne die 5 häufigsten Pitch-Fehler.",
+ a:`<ul><li>Zu viel Methode, zu wenig Empfehlung</li><li>Drei Empfehlungen klingen gleich</li><li>Keine konkrete ROI-Zahl</li><li>Keine Antwort auf „Was übersehen wir?“</li><li>Präsentator schaut auf Slides statt ins Publikum</li></ul>`},
+{t:"pitch",s:"fall",q:"Wie ist die 1-Slide-Pitch-Vorlage aus der Aufgabe aufgebaut?",
+ a:`<p>Titel („Drei Hebel für …“) · drei Zeilen je mit Firma, Maßnahme, Score und <b>einer</b> Zahl (ROI, Zeitgewinn oder Quick-Win-Dauer) · Fußzeile: <b>Anti-Wahl</b>.</p><p>Erster Satz im Vortrag: die Wirkung, nicht die Methode.</p>`},
+{t:"pitch",s:"fall",q:"Wie lautet der erste Satz deines A02-Pitchs?",
+ a:`<p>„Schmidt und Wagner können mit drei Maßnahmen rund 9.000 Euro pro Monat an Geld und Arbeitszeit zurückgewinnen, bei zusammen rund 8.000 Euro Einsatz.“</p><p>Gemeinsames Muster: <b>Was nicht erfasst wird, kostet Geld.</b></p>`},
+
+/* ---------- Fälle ---------- */
+{t:"fall",s:"fall",q:"Schmidt: Was zeigt der Pareto auf Schadensfälle (200 Fälle WMS 2025)?",
+ a:`<ul><li>Transport/Übergabe an Subunternehmer: <b>104 von 200</b> Fällen, <b>75 %</b> der Schadenssumme (212.266 €)</li><li>Falschauslieferungen: 54 Fälle (27 %), aber nur 10 % der Summe</li></ul>`, trap:`200 Fälle erfüllen die Mindestgröße 100. Es fehlt aber das Sendungsvolumen je Sub, also keine echte Schadenquote.`},
+{t:"fall",s:"fall",q:"Schmidt: Wie groß ist die Regress-Lücke?",
+ a:`<p>Nur <b>18 von 68</b> Transportbrüchen gehen in Regress (26 %). Bei drei von vier Fällen bleibt Geld liegen. Maßnahme: feste Regel, Checkliste, Fristen-Erinnerung, ca. 4 Wochen.</p>`, trap:`Vor dem Termin klären: Warenwert und Gewicht der 50 offenen Brüche (Haftungsgrenze HGB § 431). Schmidt-Stundensatz 40 €/h ist eine Annahme.`},
+{t:"fall",s:"fall",q:"Nenne die 8 Kandidaten aus A01 mit Reife/Daten.",
+ a:`<table><tr><th>Firma</th><th>Prozess</th><th>Reife</th><th>Daten</th></tr><tr><td>S</td><td>Schaden/Regress</td><td>4</td><td>2</td></tr><tr><td>S</td><td>Transport/Übergabe Sub</td><td>3</td><td>2</td></tr><tr><td>S</td><td>Kommissionierung</td><td>3 (A)</td><td>2</td></tr><tr><td>S</td><td>Auftragsdaten-Kette</td><td>2</td><td>2</td></tr><tr><td>W</td><td>Bedarfsschätzung</td><td>2</td><td>1</td></tr><tr><td>W</td><td>Disposition</td><td>2</td><td>2</td></tr><tr><td>W</td><td>Retouren/Abschriften</td><td>2</td><td>1</td></tr><tr><td>W</td><td>Bestellübermittlung</td><td>1</td><td>1</td></tr></table><p>In A02 kam Wagner Auslieferung (3 % Fehler) als 9. Kandidat dazu.</p>`},
+{t:"fall",s:"fall",q:"Was ist das gemeinsame Muster von Schmidt und Wagner?",
+ a:`<p><b>Was nicht erfasst wird, kostet Geld.</b> Schmidt verfolgt Transportbrüche nicht konsequent in Regress, Wagner hat Bestellungen und Abschriften nur auf Zettel und Telefon.</p>`},
+{t:"fall",s:"fall",q:"Welche offenen Punkte musst du vor dem Termin noch klären?",
+ a:`<ul><li>4,8 h Chef-Zeit pro Tag mit Wagner prüfen (eine Woche Strichliste)</li><li>Warenwert/Gewicht der 50 offenen Schmidt-Brüche (HGB § 431)</li><li>Sendungsvolumen je Sub bei Schmidt</li><li>Sind die 2.050 € der Orga-Stufe schon verdoppelt?</li></ul>`},
+{t:"fall",s:"fall",q:"Für Modul 4: Welcher Top-3-Kandidat ist am KI-tauglichsten und warum?",
+ a:`<p><b>Schmidt-Regress</b>: Schadensunterlagen lesen und Regressschreiben vorbereiten ist typische Arbeit für Sprach-KI, und es gibt 200 echte WMS-Fälle als Datenbasis.</p>`},
+/* ---------- Flashcards (Kurs, 20 Karten) ---------- */
+{t:"flash",s:"kurs",k:"Konzept",q:"Flashcard: Was besagt das Pareto-Prinzip (80/20-Regel)?",
+ a:`<p>Eine kleine Anzahl von Ursachen (ca. 20 %) ist für den Großteil der Auswirkungen (ca. 80 %) verantwortlich. Es hilft dir, dich auf die wichtigsten Probleme zu konzentrieren, statt dich in Details zu verlieren.</p>`},
+{t:"flash",s:"kurs",k:"Beispiel",q:"Flashcard: Pareto-Anwendung bei Schmidt Logistik?",
+ a:`<p>Die Analyse der 200 Schadensfälle zeigt: <b>Drei von sieben Schadensarten</b> (Transportbruch, Falschauslieferung, Verlust/Diebstahl) verursachen <b>158 von 200 Fällen, also 79 %</b>. Eine typische Pareto-Verteilung, die zeigt, wo du als Erstes ansetzen solltest.</p>`,
+ trap:`Nicht verwechseln mit „104 von 200 Fällen, 75 % der Schadenssumme“ aus A01: Das ist die Auswertung nach <b>Prozessstelle</b> (Transport/Übergabe an Subunternehmer), hier geht es um <b>Schadensarten</b>. Zwei Aggregationsebenen, beide richtig.`},
+{t:"flash",s:"kurs",k:"Methode",q:"Flashcard: Was ist ein Ishikawa-Diagramm (Fischgrätendiagramm)?",
+ a:`<p>Eine Methode zur Ursachenanalyse. Du visualisierst mögliche Ursachen eines Problems, sortiert nach den <b>6M-Kategorien</b> (Mensch, Maschine, Methode, Material, Mitwelt, Messung), um die Wurzel des Problems zu finden.</p>`},
+{t:"flash",s:"kurs",k:"Methode",q:"Flashcard: Wie funktioniert die 5-Why-Methode?",
+ a:`<p>Du fragst <b>fünfmal hintereinander „Warum?“</b>, um von einem oberflächlichen Problem zur eigentlichen, <b>veränderbaren Grundursache</b> vorzudringen. So vermeidest du reine Symptombekämpfung.</p>`},
+{t:"flash",s:"kurs",k:"Definition",q:"Flashcard: Was ist ein Key Performance Indicator (KPI)?",
+ a:`<p>Eine Kennzahl, die den Fortschritt bei der Erreichung wichtiger Ziele misst. Ein guter KPI ist <b>messbar, relevant und an eine konkrete Handlung gekoppelt</b>. Er hilft dir, die Leistung eines Prozesses zu steuern.</p>`},
+{t:"flash",s:"kurs",k:"Konzept",q:"Flashcard: Nenne zwei typische Fallen bei der Definition von KPIs.",
+ a:`<ol><li><b>Fehlanreiz</b>: Der KPI belohnt Verhalten, das dem Gesamtziel schadet.</li><li><b>Manipulation</b>: Mitarbeiter können den KPI-Wert schönen, ohne die tatsächliche Leistung zu verbessern.</li></ol><p>Wähle deine KPIs daher sorgfältig.</p>`,
+ trap:`Verwandt: Goodharts Gesetz und das Steckbrief-Feld „Anti-Falle“.`},
+{t:"flash",s:"kurs",k:"Methode",q:"Flashcard: Was ist das Ziel einer Wertstromanalyse?",
+ a:`<p>Sie visualisiert alle Schritte eines Prozesses, um <b>wertschöpfende Tätigkeiten von Verschwendung</b> (Warten, Nacharbeit) zu unterscheiden. Ziel: den <b>Fluss verbessern</b> und die <b>Durchlaufzeit verkürzen</b>.</p>`},
+{t:"flash",s:"kurs",k:"Definition",q:"Flashcard: Unterschied: Durchlaufzeit (DLZ) vs. Bearbeitungszeit (PT)?",
+ a:`<p><b>Bearbeitungszeit</b> = die reine, wertschöpfende Arbeitszeit.</p><p><b>Durchlaufzeit</b> = die Gesamtzeit vom Start bis zum Ende, inklusive aller Warte- und Liegezeiten.</p><p>Oft ist die PT (in M02 auch B/Z genannt) nur ein Bruchteil der DLZ.</p>`},
+{t:"flash",s:"kurs",k:"Beispiel",q:"Flashcard: Was zeigt die Wertstromanalyse bei den Wagner-Filialen?",
+ a:`<p>Bearbeitungszeit <b>58 Minuten</b>, Durchlaufzeit <b>rund 14,5 Stunden</b>. Der Großteil ist Verschwendung (Warten auf Wagner, Sammeln von Bestellungen). Hier liegt das größte Potenzial.</p>`},
+{t:"flash",s:"kurs",k:"Definition",q:"Flashcard: Was misst die Process Cycle Efficiency (PCE)?",
+ a:`<p>Das Verhältnis von Bearbeitungszeit zu Durchlaufzeit:</p><code class="f">Gesamt-PCE = Σ PT / DLZ × 100,   DLZ = Σ (PT + WT)</code><p>Sie zeigt den Anteil der wertschöpfenden Zeit. Bei Wagner nur <b>6,7 %</b>, typisch für Büroprozesse.</p>`},
+{t:"flash",s:"kurs",k:"Konzept",q:"Flashcard: Was ist ein Soll-Wertstrom?",
+ a:`<p>Ein Entwurf, wie ein Prozess in Zukunft idealerweise aussehen sollte. Er entsteht aus der Analyse des Ist-Zustands und zielt darauf ab, <b>Verschwendung gezielt zu eliminieren</b> und den Fluss zu optimieren, <b>statt nur schneller zu arbeiten</b>.</p>`},
+{t:"flash",s:"kurs",k:"Anwendung",q:"Flashcard: Wofür nutzt du ein ROI-Modell bei Prozessverbesserungen?",
+ a:`<p>Um die <b>Wirtschaftlichkeit</b> einer Investition zu belegen. Du stellst die <b>einmaligen Kosten</b> (z. B. Software) den <b>laufenden Einsparungen</b> (z. B. gesparte Arbeitszeit) gegenüber, um zu zeigen, <b>wann sich die Maßnahme rechnet</b>.</p>`},
+{t:"flash",s:"kurs",k:"Konzept",q:"Flashcard: Was beschreiben die CMMI-Reifegrade?",
+ a:`<p>CMMI beschreibt die Reife von Prozessen in 5 Stufen: <b>initial (1)</b>, <b>gemanagt (2)</b>, <b>definiert (3)</b>, <b>quantitativ gemanagt (4)</b>, <b>optimierend (5)</b>.</p><p>Im Kurs arbeitest du mit einem Reife-Score von 1 bis 5, der aus diesen Stufen <b>remappt</b> ist.</p>`,
+ trap:`Wie genau remappt wird, ist im Kursmaterial uneinheitlich: Kapitel 4 legt Score 4 = datenbasiert gesteuert (≈ CMMI 4) fest, das Score-Cheat-Sheet gibt schon für CMMI 4+ die volle 5.`},
+{t:"flash",s:"kurs",k:"Tool",q:"Flashcard: Was ist der Kern von Process Mining?",
+ a:`<p>Die automatische Analyse von digitalen Spuren (<b>Event-Logs</b>) in IT-Systemen, um den <b>tatsächlichen Prozessablauf</b> zu rekonstruieren. Es deckt Abweichungen vom Soll-Prozess, Engpässe und Ineffizienzen auf.</p>`},
+{t:"flash",s:"kurs",k:"Methode",q:"Flashcard: Was ist eine ABC-Klassifizierung?",
+ a:`<p>Eine Methode, um Elemente nach Wichtigkeit zu sortieren:</p><ul><li><b>A</b>: die wichtigsten (wenige, aber hoher Wert/Anteil)</li><li><b>B</b>: mittelwichtig</li><li><b>C</b>: unwichtig (viele, aber geringer Wert/Anteil)</li></ul>`},
+{t:"flash",s:"kurs",k:"Konzept",q:"Flashcard: Was ist ein typischer Anwendungsfehler des Pareto-Prinzips?",
+ a:`<p>Zu glauben, man könne die <b>B- und C-Fälle komplett ignorieren</b>. Das Prinzip hilft bei der Priorisierung, aber auch kleine, seltene Probleme können kritisch sein oder sich mit der Zeit zu A-Problemen entwickeln.</p>`},
+{t:"flash",s:"kurs",k:"Tool",q:"Flashcard: Welche Elemente gehören in einen guten KPI-Steckbrief?",
+ a:`<p>Formel, Datenquelle, Messintervall, Zielwert, Schwellwerte (z. B. rot/gelb/grün) und ein klar benannter Verantwortlicher. Das sorgt für <b>Eindeutigkeit und Verbindlichkeit</b>.</p>`,
+ trap:`Die vierte Variante der Feldliste (hier 6 Felder ohne Name). Vollständig ist die 9-Felder-Liste aus dem Cheat-Sheet.`},
+{t:"flash",s:"kurs",k:"Konzept",q:"Flashcard: Was ist eine Balanced Scorecard (BSC)?",
+ a:`<p>Ein Rahmenwerk für KPIs aus <b>vier Perspektiven</b>: Finanzen, Kunden, interne Prozesse, Lernen und Entwicklung. Es verhindert eine einseitige Steuerung nur nach Finanzkennzahlen.</p>`},
+{t:"flash",s:"kurs",k:"Anwendung",q:"Flashcard: Warum haben Stakeholder unterschiedliche KPI-Interessen?",
+ a:`<p>Der <b>Geschäftsführer</b> will strategische Finanz-KPIs, der <b>Filialleiter</b> operative KPIs für den Tagesbetrieb, die <b>IT</b> achtet auf Systemleistung. Ein gutes Cockpit muss diese Sichten ausbalancieren.</p>`,
+ trap:`Leichte Abweichung zum Stakeholder-Cheat-Sheet: Dort will die IT vor allem die <b>Datenpflege minimieren</b> (jede KPI = eine Pipeline), nicht Systemleistung messen.`},
+{t:"flash",s:"kurs",k:"Beispiel",q:"Flashcard: Schmidt Logistik: Warum Pareto nach Wert und Anzahl vergleichen?",
+ a:`<p>Der <b>häufigste</b> Schaden (Transportbruch) ist nicht der <b>teuerste</b>. Der deutlich seltenere <b>Verlust/Diebstahl</b> verursacht den höchsten Schadenswert in Euro.</p><p>Beide Sichten sind wichtig: eine zur <b>Prozessoptimierung</b>, die andere zur <b>Risikosteuerung</b>.</p>`},
+/* ---------- Modul-Zusammenfassung ---------- */
+{t:"sum",s:"kurs",k:"Überblick",q:"Worum geht es in Modul 3 (Prozessanalyse und KPIs)?",
+ a:`<p>Geschäftsprozesse <b>systematisch untersuchen und verbessern</b>: weg vom Bauchgefühl, hin zu <b>datenbasierten Entscheidungen</b>.</p><ul><li>wahre Ursachen für Verschwendung, Fehler, Verzögerungen finden</li><li>Prozessleistung mit KPIs messbar machen und gezielt optimieren</li></ul><p>Ziel: Abläufe nicht nur schneller, sondern <b>grundlegend besser</b> gestalten.</p>`},
+{t:"sum",s:"kurs",k:"Überblick",q:"Nenne die sechs Schlüssel-Konzepte von Modul 3.",
+ a:`<ol><li>Pareto-Prinzip (80/20)</li><li>Ursachenanalyse (Ishikawa &amp; 5-Why)</li><li>KPIs</li><li>Wertstromanalyse (Value Stream Mapping)</li><li>Return on Investment (ROI)</li><li>Prozess-Reifegrad</li></ol>`,
+ trap:`Merkhilfe (eigene): <b>Wo</b> (Pareto) → <b>Warum</b> (Ishikawa/5-Why) → <b>Wie gut</b> (KPI) → <b>Wo hakt der Fluss</b> (Wertstrom) → <b>Lohnt es sich</b> (ROI) → <b>Wie reif</b> (Reifegrad).`},
+{t:"sum",s:"kurs",k:"Schlüssel-Konzept",q:"Zusammenfassung: Pareto-Prinzip",
+ a:`<p>Wenige Ursachen (ca. 20 %) sind für den Großteil der Wirkung (ca. 80 %) verantwortlich. Du nutzt es, um die <b>wichtigsten Probleme zu identifizieren</b>, statt dich in Details zu verlieren.</p>`},
+{t:"sum",s:"kurs",k:"Schlüssel-Konzept",q:"Zusammenfassung: Ursachenanalyse mit Ishikawa und 5-Why",
+ a:`<p><b>Ishikawa</b> (Fischgräte): mögliche Ursachen strukturiert nach den 6-M-Kategorien sammeln.</p><p><b>5-Why</b>: anschließend vom Symptom zur wirklichen, <b>behebbaren Grundursache</b> vordringen.</p>`},
+{t:"sum",s:"kurs",k:"Schlüssel-Konzept",q:"Zusammenfassung: KPIs",
+ a:`<p>Kennzahlen, mit denen du die Leistung eines Prozesses misst. Du definierst sie sauber im <b>Steckbrief</b> (Formel, Datenquelle, Zielwert, Verantwortlicher) und vermeidest typische Fallen wie <b>Fehlanreize</b>.</p>`,
+ trap:`Die Zusammenfassung nennt nur 4 Steckbrief-Felder. Für Aufträge gilt die vollständige 9-Felder-Liste aus dem Cheat-Sheet.`},
+{t:"sum",s:"kurs",k:"Schlüssel-Konzept",q:"Zusammenfassung: Wertstromanalyse",
+ a:`<p>Einen kompletten Prozess vom Anfang bis zum Ende visualisieren. Dabei <b>strikt</b> zwischen wertschöpfender <b>Bearbeitungszeit (PT)</b> und Verschwendung wie <b>Wartezeit (WT)</b> unterscheiden, um die Gesamtdurchlaufzeit drastisch zu senken.</p>`},
+{t:"sum",s:"kurs",k:"Schlüssel-Konzept",q:"Zusammenfassung: Return on Investment (ROI)",
+ a:`<p>Eine einfache Berechnung, die <b>Investitionskosten und erwarteten Nutzen</b> einer Maßnahme gegenüberstellt. Sie hilft zu entscheiden, ob sich eine Prozessverbesserung <b>finanziell lohnt</b>.</p>`},
+{t:"sum",s:"kurs",k:"Schlüssel-Konzept",q:"Zusammenfassung: Prozess-Reifegrad",
+ a:`<p>Reife-Score von <b>1 bis 5</b>, remappt aus dem CMMI-Stufenmodell:</p><p><b>Score 1</b> = heldengetrieben, hängt an einer Person<br><b>Score 5</b> = gemessen mit Konsequenzen</p><p>Er gibt Orientierung für die nächsten Entwicklungsschritte.</p>`,
+ trap:`Dritte Formulierung für Score 5: Kapitel 4 sagt „kontinuierlich verbessernd“, die Zusammenfassung „gemessen mit Konsequenzen“, das Cheat-Sheet „CMMI 4+, messbar verbesserbar“. Gemeinsamer Kern: Es wird gemessen <b>und</b> daraus gehandelt. „Heldengetrieben“ für Score 1 passt zur Bus-Frage aus A01.`},
+{t:"sum",s:"kurs",k:"Praxis im Kurs",q:"Was hast du bei Schmidt Logistik analysiert?",
+ a:`<p>Pareto auf <b>echte Schadensdaten</b>: die wenigen Schadensarten, die für fast 80 % der Fälle verantwortlich sind. Dann der häufigsten Schadensart <b>„Transportbruch“</b> mit Ishikawa und 5-Why auf den Grund gehen.</p>`},
+{t:"sum",s:"kurs",k:"Praxis im Kurs",q:"Was hast du bei den Wagner-Filialen gemacht?",
+ a:`<p><b>Wertstromanalyse</b> des Bestellprozesses der Bäckerei Wagner: von rund <b>14,5 Stunden Durchlaufzeit</b> ist nur <b>knapp eine Stunde</b> echte Bearbeitung (58 min). Daraus ein schlankerer <b>Soll-Prozess</b>, der die Zettelwirtschaft abschafft.</p>`},
+{t:"sum",s:"kurs",k:"Praxis im Kurs",q:"Welche KPI- und ROI-Aufgaben gab es im Kurs?",
+ a:`<ul><li>KPI-Steckbriefe für die <b>Schmidt-Auftragsannahme</b> (3 Kennzahlen, die dritte wahlweise zu Hoffmann)</li><li><b>Wagner-KPI-Cockpit</b> im Trio verhandeln</li><li><b>ROI</b> für eine konkrete Wagner-Maßnahme, z. B. ein digitales Bestellsystem</li></ul>`},
+{t:"sum",s:"kurs",k:"Ausblick",q:"Wie schließt Modul 3 an die folgenden Module an?",
+ a:`<p>Die identifizierten <b>Schwachstellen und priorisierten Maßnahmen</b> sind die Grundlage für die <b>Projektplanung</b> in den nächsten Modulen.</p><p>Die definierten <b>KPIs</b> messen und steuern später den <b>Erfolg der Veränderungen</b>.</p>`,
+ trap:`Konkret für dich: Die Top-3-Liste aus A02 ist der Startpunkt von Modul 4 (KI-Tauglichkeit prüfen, einen Workflow bauen).`},
+];
+const BASE_TOPICS=Object.keys(TOPICS);
+const CUSTOM_KEY="m03-lernkarten-custom";
+let custom={topics:[],cards:[]};
+let storageOk=true;
+(function loadCustom(){
+  let emb=null; try{emb=JSON.parse(document.getElementById("embedded-custom").textContent||"null");}catch(e){}
+  let ls=null; try{ls=JSON.parse(localStorage.getItem(CUSTOM_KEY)||"null"); localStorage.setItem(CUSTOM_KEY+"-probe","1"); localStorage.removeItem(CUSTOM_KEY+"-probe");}catch(e){storageOk=false;}
+  custom=ls||emb||custom;
+  if(ls&&emb){for(const t of emb.topics||[]) if(!custom.topics.some(x=>x.id===t.id)) custom.topics.push(t); for(const c of emb.cards||[]) if(!custom.cards.some(x=>x.id===c.id)) custom.cards.push(c);}
+  if(!custom.topics) custom.topics=[]; if(!custom.cards) custom.cards=[];
+})();
+function saveCustom(){try{localStorage.setItem(CUSTOM_KEY,JSON.stringify(custom));return true;}catch(e){storageOk=false;return false;}}
+function fmtOwn(t){
+  const e=t.replace(/[&<>]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[m])).replace(/\*\*(.+?)\*\*/g,"<b>$1</b>");
+  const lines=e.split(/\r?\n/); let out="",inl=false;
+  for(const l of lines){ if(/^\s*[-•]\s+/.test(l)){ if(!inl){out+="<ul>";inl=true;} out+="<li>"+l.replace(/^\s*[-•]\s+/,"")+"</li>"; } else { if(inl){out+="</ul>";inl=false;} if(l.trim()) out+="<p>"+l+"</p>"; } }
+  if(inl) out+="</ul>"; return out;
+}
+function ownCardObj(o){return {t:o.t,s:"own",own:true,oid:o.id,q:o.q,a:fmtOwn(o.a),merk:o.merk?o.merk.replace(/[&<>]/g,""):"",trap:o.trap?fmtOwn(o.trap).replace(/^<p>|<\/p>$/g,""):"",id:"own:"+o.id};}
+function applyCustomTopics(){
+  for(const k of Object.keys(TOPICS)) if(!BASE_TOPICS.includes(k)) {delete TOPICS[k];delete ICON[k];}
+  for(const t of custom.topics){TOPICS[t.id]=t.name;ICON[t.id]=t.icon||"⭐";}
+}
+applyCustomTopics();
+for(const o of custom.cards) if(TOPICS[o.t]) CARDS.push(ownCardObj(o));
+
+/* ---------- state ---------- */
+const KEY="m03-lernkarten-v2";
+let state={r:{},topic:"all",filter:"all",src:"all",order:null,idx:0,view:"deck"};
+try{const s=JSON.parse(localStorage.getItem(KEY)||"null"); if(s) state=Object.assign(state,s);}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}}
+CARDS.forEach(c=>{if(!c.own)c.id=c.q;});
+const IDS=CARDS.map(c=>c.id);
+if(!state.order) state.order=IDS.slice();
+state.order=state.order.filter(id=>IDS.includes(id)).concat(IDS.filter(id=>!state.order.includes(id)));
+const BYID=Object.fromEntries(CARDS.map(c=>[c.id,c]));
+let flipped=false;
+
+let query="";
+const norm=t=>t.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/ß/g,"ss");
+const strip=h=>h.replace(/<[^>]+>/g," ").replace(/&amp;/g,"&").replace(/&lt;/g,"<").replace(/&gt;/g,">");
+CARDS.forEach(c=>{c.hay=norm([c.q,strip(c.a),c.merk||"",strip(c.trap||""),c.k||"",TOPICS[c.t],SRC[c.s],c.s2||""].join(" "));});
+function terms(){return norm(query).split(/\s+/).filter(Boolean);}
+function matches(c){const t=terms();return t.every(w=>c.hay.includes(w));}
+function visible(){
+  return state.order.map(i=>BYID[i]).filter(c=>matches(c) &&
+    (state.topic==="all"||c.t===state.topic) &&
+    (state.src==="all"||c.s===state.src) &&
+    (state.filter==="all"||(state.filter==="open"&&state.r[c.id]!=="ok")||(state.filter==="no"&&state.r[c.id]==="no")||(state.filter==="sc"&&c.sc)||(state.filter==="pflicht"&&!c.w)));
+}
+function esc(s){return s.replace(/[&<>]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[m]));}
+
+function tvars(t){if(!t)return "";const ct=custom.topics.find(x=>x.id===t);if(ct)return `--c:${ct.color};--c2:color-mix(in srgb,${ct.color} 65%,black)`;return `--c:var(--t-${t});--c2:var(--t-${t}2)`;}
+function renderChips(){
+  const el=document.getElementById("chips"); el.innerHTML="";
+  const mk=(k,label,n)=>{const b=document.createElement("button");b.className="chip"+(state.topic===k?" on":"")+(n===0&&query?" zero":"");if(k!=="all")b.style.cssText=tvars(k);b.innerHTML=`<span class="e"></span>${label}<span class="n">${n}</span>`;b.onclick=()=>{state.topic=k;state.idx=0;flipped=false;save();render();};el.appendChild(b);};
+  mk("all","Alle",CARDS.filter(matches).length);
+  for(const k in TOPICS) mk(k,TOPICS[k],CARDS.filter(c=>c.t===k&&matches(c)).length);
+}
+function renderProgress(){
+  const pool=CARDS.filter(c=>state.topic==="all"||c.t===state.topic);
+  const ok=pool.filter(c=>state.r[c.id]==="ok").length, no=pool.filter(c=>state.r[c.id]==="no").length, n=pool.length;
+  document.getElementById("bar").innerHTML=`<i style="width:${ok/n*100}%;background:linear-gradient(90deg,#4ade80,#16a34a)"></i><i style="width:${no/n*100}%;background:linear-gradient(90deg,#fdba74,#ea580c)"></i>`;
+  document.getElementById("pstats").innerHTML=`<span><span class="dot" style="background:#22c55e"></span>gewusst ${ok}</span><span><span class="dot" style="background:#f97316"></span>nochmal ${no}</span><span><span class="dot" style="background:var(--surface2);border:1px solid var(--line)"></span>offen ${n-ok-no}</span><span>${TOPICS[state.topic]||"Alle Themen"}: ${Math.round(ok/n*100)} % gewusst</span>`;
+}
+function statusHTML(c){return state.r[c.id]==="ok"?'<span class="status ok">✓ gewusst</span>':state.r[c.id]==="no"?'<span class="status no">↻ nochmal</span>':'';}
+function metaHTML(c){
+  return `<div class="meta"><span class="topic"><span class="ico">${ICON[c.t]}</span>${TOPICS[c.t]}</span><span>${statusHTML(c)} <span class="tag ${c.s}">${SRC[c.s]}</span></span></div>
+  ${c.sc||c.w||c.k?`<div style="margin-top:8px">${c.k?`<span class="badge">${c.k}</span>`:""}${c.sc?`<span class="badge">✔ Selbstcheck ${c.sc}</span>`:""}${c.w?`<span class="badge w">📖 Weiterlesen</span>`:""}</div>`:""}`;
+}
+function answerHTML(c){
+  return `<div class="a">${c.merk?`<div class="merk"><span class="mi">💡</span><span><b>Merkbild:</b> ${c.merk}</span></div>`:""}${c.a}${c.trap?`<div class="trap"><b>⚠ Falle/Hinweis:</b> ${c.trap}</div>`:""}${c.s2?`<p style="font-size:.8rem;color:var(--muted);margin-top:8px">${c.s2}</p>`:""}</div>`;
+}
+function faceHTML(c){return flipped?`${metaHTML(c)}<div class="qs">${c.q}</div>${answerHTML(c)}`:`${metaHTML(c)}<div class="q">${c.q}</div><div class="hint">↻ Antippen oder Leertaste zum Umdrehen</div>`;}
+let flipping=false;
+function renderDeck(){
+  const v=visible(), el=document.getElementById("deck");
+  if(!v.length){el.innerHTML=`<div class="empty">Keine Karten in dieser Auswahl. ${state.filter!=="all"?"Alles gewusst? Stell „Anzeigen“ auf „alle Karten“.":""}</div>`;return;}
+  if(state.idx>=v.length) state.idx=0;
+  const c=v[state.idx];
+  el.innerHTML=`<div class="flip" id="card" tabindex="0" role="button" aria-label="Karte umdrehen" style="${tvars(c.t)}">
+    <div class="face ${flipped?"back":"front"}" id="face" style="${tvars(c.t)}">${faceHTML(c)}</div></div>
+  <div class="nav"><div class="grp"><button class="btn" id="prev">← Zurück</button><button class="btn" id="next">Weiter →</button></div>
+  <span class="counter">Karte ${state.idx+1} von ${v.length}</span>
+  <div class="grp"><button class="btn rate-no" id="no">↻ Nochmal</button><button class="btn rate-ok" id="ok">✓ Gewusst</button></div></div>
+  <div class="kbd">Tasten: Leertaste umdrehen · ← → blättern · 1 nochmal · 2 gewusst</div>`;
+  document.getElementById("card").onclick=e=>{if(e.target.closest("a"))return;flip();};
+  document.getElementById("prev").onclick=()=>move(-1);
+  document.getElementById("next").onclick=()=>move(1);
+  document.getElementById("no").onclick=()=>rate("no");
+  document.getElementById("ok").onclick=()=>rate("ok");
+}
+function renderList(){
+  const v=visible();
+  document.getElementById("list").innerHTML=v.length?v.map(c=>`<div class="item" style="${tvars(c.t)}">${metaHTML(c)}<div class="qs">${c.q}</div>${answerHTML(c)}</div>`).join(""):`<div class="empty">Keine Karten in dieser Auswahl.</div>`;
+}
+function highlight(root){
+  const t=terms(); if(!t.length||!root) return;
+  const re=new RegExp("("+t.map(w=>w.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).join("|")+")","gi");
+  const walk=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>n.parentNode.closest("mark,button,.tag,.badge,.status")?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT});
+  const nodes=[];while(walk.nextNode())nodes.push(walk.currentNode);
+  for(const n of nodes){
+    const txt=n.nodeValue, nt=norm(txt); if(nt.length!==txt.length) { if(!re.test(txt)) continue; re.lastIndex=0; const span=document.createElement("span"); span.innerHTML=esc(txt).replace(re,"<mark>$1</mark>"); n.replaceWith(span); continue; }
+    let idx=[],m; const rn=new RegExp(re.source,"gi"); while((m=rn.exec(nt))){idx.push([m.index,m.index+m[0].length]); if(!m[0].length)break;}
+    if(!idx.length) continue;
+    const frag=document.createDocumentFragment(); let last=0;
+    for(const [a,b] of idx){frag.append(txt.slice(last,a));const mk=document.createElement("mark");mk.textContent=txt.slice(a,b);frag.append(mk);last=b;}
+    frag.append(txt.slice(last)); n.replaceWith(frag);
+  }
+}
+function renderHint(){
+  const h=document.getElementById("shint"), x=document.getElementById("qx");
+  x.hidden=!query;
+  if(!query){h.hidden=true;return;}
+  const n=visible().length, all=CARDS.filter(matches).length;
+  h.hidden=false;
+  h.textContent=all===0?`Keine Karte enthält „${query}“.`:`${n} Treffer${n!==all?` in dieser Auswahl (${all} insgesamt, Thema/Filter auf „Alle“ stellen für mehr)`:""} für „${query}“ · Esc leert die Suche`;
+}
+function render(){
+  renderChips();renderProgress();renderHint();
+  document.getElementById("filterSel").value=state.filter;
+  document.getElementById("srcSel").value=state.src;
+  const deck=state.view==="deck";
+  document.getElementById("deck").hidden=!deck;document.getElementById("list").hidden=deck;
+  document.getElementById("viewBtn").textContent=deck?"Listenansicht":"Kartenansicht";
+  deck?renderDeck():renderList();
+  highlight(document.getElementById(deck?"deck":"list"));
+}
+function flip(){
+  const f=document.getElementById("face"); if(!f||flipping) return;
+  const v=visible(); const c=v[state.idx];
+  const swap=()=>{flipped=!flipped;f.className="face "+(flipped?"back":"front");f.innerHTML=faceHTML(c);highlight(f);};
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches){swap();return;}
+  flipping=true; f.classList.add("turn");
+  setTimeout(()=>{swap();f.classList.add("turn-in");void f.offsetWidth;f.classList.remove("turn-in");flipping=false;},180);
+}
+function move(d){const n=visible().length;if(!n)return;state.idx=(state.idx+d+n)%n;flipped=false;save();renderDeck();highlight(document.getElementById("deck"));}
+function rate(r){
+  const v=visible(); if(!v.length)return; const c=v[state.idx];
+  state.r[c.id]=r; flipped=false;
+  const nv=visible();
+  if(nv.length===v.length) state.idx=(state.idx+1)%nv.length; else if(state.idx>=nv.length) state.idx=0;
+  save(); renderProgress(); renderHint(); renderDeck(); highlight(document.getElementById("deck"));
+}
+document.getElementById("filterSel").onchange=e=>{state.filter=e.target.value;state.idx=0;flipped=false;save();render();};
+document.getElementById("srcSel").onchange=e=>{state.src=e.target.value;state.idx=0;flipped=false;save();render();};
+document.getElementById("shuffleBtn").onclick=()=>{const a=state.order.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}state.order=a;state.idx=0;flipped=false;save();render();};
+document.getElementById("resetBtn").onclick=()=>{state.r={};state.order=IDS.slice();state.idx=0;flipped=false;save();render();};
+document.getElementById("viewBtn").onclick=()=>{state.view=state.view==="deck"?"list":"deck";save();render();};
+document.getElementById("themeBtn").onclick=()=>{const r=document.documentElement;const dark=r.dataset.theme?r.dataset.theme==="dark":matchMedia("(prefers-color-scheme: dark)").matches;r.dataset.theme=dark?"light":"dark";try{localStorage.setItem(KEY+"-theme",r.dataset.theme);}catch(e){}};
+try{const t=localStorage.getItem(KEY+"-theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}
+document.addEventListener("keydown",e=>{
+  if(e.key==="/"&&e.target.tagName!=="INPUT"){e.preventDefault();document.getElementById("q").focus();return;}
+  if(e.target.id==="q"){if(e.key==="Escape"){setQuery("");e.target.blur();}return;}
+  if(state.view!=="deck"||e.target.tagName==="SELECT")return;
+  if(e.key===" "){e.preventDefault();flip();}
+  else if(e.key==="ArrowRight")move(1);
+  else if(e.key==="ArrowLeft")move(-1);
+  else if(e.key==="1")rate("no");
+  else if(e.key==="2")rate("ok");
+});
+/* ---------- eigene Inhalte ---------- */
+function hayOf(c){return norm([c.q,strip(c.a),c.merk||"",strip(c.trap||""),c.k||"",TOPICS[c.t],SRC[c.s],c.s2||""].join(" "));}
+function rebuildCustom(){
+  applyCustomTopics();
+  for(let i=CARDS.length-1;i>=0;i--) if(CARDS[i].own) CARDS.splice(i,1);
+  for(const o of custom.cards) if(TOPICS[o.t]){const c=ownCardObj(o);c.hay=hayOf(c);CARDS.push(c);}
+  IDS.length=0; CARDS.forEach(c=>IDS.push(c.id));
+  for(const k of Object.keys(BYID)) delete BYID[k]; CARDS.forEach(c=>BYID[c.id]=c);
+  state.order=state.order.filter(id=>IDS.includes(id)).concat(IDS.filter(id=>!state.order.includes(id)));
+  if(!TOPICS[state.topic]&&state.topic!=="all") state.topic="all";
+  save(); render(); renderOwn();
+}
+function msg(t,bad){const m=document.getElementById("ownMsg");m.textContent=t;m.style.color=bad?"var(--warn)":"var(--ok)";}
+function persist(okText){const ok=saveCustom();msg(ok?okText:okText+" Achtung: Der Browser blockiert die Speicherung. Bitte jetzt exportieren!",!ok);rebuildCustom();}
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+let editId=null;
+function renderOwn(){
+  const sel=document.getElementById("cTopic"), cur=sel.value;
+  sel.innerHTML=Object.keys(TOPICS).map(k=>`<option value="${k}">${ICON[k]} ${esc(TOPICS[k])}${custom.topics.some(t=>t.id===k)?" (eigenes)":""}</option>`).join("");
+  if(cur&&TOPICS[cur]) sel.value=cur; else if(custom.topics.length) sel.value=custom.topics[custom.topics.length-1].id;
+  const L=document.getElementById("ownList");
+  const tl=custom.topics.map(t=>`<div class="orow"><span class="ot" style="color:${t.color}">${t.icon} ${esc(t.name)}</span><span class="oq" style="color:var(--muted)">${custom.cards.filter(c=>c.t===t.id).length} Karten</span><span class="acts"><button class="btn mini" data-deltopic="${t.id}">Thema löschen</button></span></div>`).join("");
+  const cl=custom.cards.map(c=>`<div class="orow"><span class="ot">${ICON[c.t]||"?"}</span><span class="oq">${esc(c.q)}</span><span class="acts"><button class="btn mini" data-edit="${c.id}">Bearbeiten</button><button class="btn mini" data-delcard="${c.id}">Löschen</button></span></div>`).join("");
+  L.innerHTML=(tl||cl)?(tl?`<p style="font-weight:800;margin:0 0 4px">Themen</p>${tl}`:"")+(cl?`<p style="font-weight:800;margin:12px 0 4px">Karten</p>${cl}`:""):`<p style="color:var(--muted);margin:0">Noch keine eigenen Themen oder Karten. Eigene Karten kannst du auch zu den vorhandenen Themen hinzufügen.</p>`;
+  document.getElementById("ownWarn").style.display="";
+  if(!storageOk) document.getElementById("ownWarn").innerHTML="<b>Dieser Browser erlaubt hier keine Speicherung.</b> Ergänzungen gehen beim Schließen verloren, wenn du sie nicht exportierst oder als HTML speicherst.";
+}
+document.getElementById("ownBtn").onclick=()=>{const p=document.getElementById("ownPanel");p.hidden=!p.hidden;if(!p.hidden){renderOwn();p.scrollIntoView({behavior:"smooth",block:"start"});}};
+document.getElementById("ownClose").onclick=()=>{document.getElementById("ownPanel").hidden=true;};
+document.getElementById("topicForm").onsubmit=e=>{e.preventDefault();
+  const name=document.getElementById("tName").value.trim(); if(!name) return;
+  if(Object.values(TOPICS).some(n=>n.toLowerCase()===name.toLowerCase())){msg("Ein Thema mit diesem Namen gibt es schon.",true);return;}
+  const t={id:"u"+uid(),name,color:document.getElementById("tColor").value,icon:document.getElementById("tIcon").value.trim()||"⭐"};
+  custom.topics.push(t); document.getElementById("tName").value="";
+  persist(`Thema „${name}“ angelegt. Jetzt rechts Karten dazu anlegen.`); document.getElementById("cTopic").value=t.id;
+};
+function resetCardForm(){editId=null;["cQ","cA","cM","cT"].forEach(i=>document.getElementById(i).value="");document.getElementById("cSubmit").textContent="Karte speichern";document.getElementById("cCancel").hidden=true;}
+document.getElementById("cardForm").onsubmit=e=>{e.preventDefault();
+  const o={t:document.getElementById("cTopic").value,q:document.getElementById("cQ").value.trim(),a:document.getElementById("cA").value.trim(),merk:document.getElementById("cM").value.trim(),trap:document.getElementById("cT").value.trim()};
+  if(!o.q||!o.a) return;
+  if(editId){const x=custom.cards.find(c=>c.id===editId);Object.assign(x,o);resetCardForm();persist("Karte geändert.");}
+  else{o.id=uid();custom.cards.push(o);const t=o.t;resetCardForm();document.getElementById("cTopic").value=t;persist("Karte gespeichert.");document.getElementById("cTopic").value=t;}
+};
+document.getElementById("cCancel").onclick=resetCardForm;
+document.getElementById("ownList").onclick=e=>{
+  const b=e.target.closest("button"); if(!b) return;
+  if(b.dataset.delcard){
+    if(b.dataset.confirm!=="1"){b.dataset.confirm="1";b.textContent="Wirklich?";return;}
+    custom.cards=custom.cards.filter(c=>c.id!==b.dataset.delcard);persist("Karte gelöscht.");
+  }else if(b.dataset.deltopic){
+    const n=custom.cards.filter(c=>c.t===b.dataset.deltopic).length;
+    if(b.dataset.confirm!=="1"){b.dataset.confirm="1";b.textContent=n?`Mit ${n} Karten löschen?`:"Wirklich?";return;}
+    custom.cards=custom.cards.filter(c=>c.t!==b.dataset.deltopic);custom.topics=custom.topics.filter(t=>t.id!==b.dataset.deltopic);persist("Thema gelöscht.");
+  }else if(b.dataset.edit){
+    const x=custom.cards.find(c=>c.id===b.dataset.edit); editId=x.id;
+    document.getElementById("cTopic").value=x.t;document.getElementById("cQ").value=x.q;document.getElementById("cA").value=x.a;document.getElementById("cM").value=x.merk||"";document.getElementById("cT").value=x.trap||"";
+    document.getElementById("cSubmit").textContent="Änderung speichern";document.getElementById("cCancel").hidden=false;document.getElementById("cQ").focus();
+  }
+};
+function download(name,text,type){const b=new Blob([text],{type});const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},500);}
+const stamp=()=>new Date().toISOString().slice(0,10);
+document.getElementById("expBtn").onclick=()=>{download(`M03-eigene-Inhalte-${stamp()}.json`,JSON.stringify({format:"m03-lernkarten-custom",version:1,...custom},null,2),"application/json");msg("Export heruntergeladen.");};
+document.getElementById("impFile").onchange=e=>{
+  const f=e.target.files[0]; if(!f) return; const r=new FileReader();
+  r.onload=()=>{try{const d=JSON.parse(r.result); if(!Array.isArray(d.topics)||!Array.isArray(d.cards)) throw 0;
+    let nt=0,nc=0;
+    for(const t of d.topics) if(t&&t.id&&t.name&&!custom.topics.some(x=>x.id===t.id)){custom.topics.push({id:String(t.id),name:String(t.name).slice(0,40),color:/^#[0-9a-f]{6}$/i.test(t.color)?t.color:"#0891b2",icon:String(t.icon||"⭐").slice(0,4)});nt++;}
+    for(const c of d.cards) if(c&&c.id&&c.q&&c.a&&!custom.cards.some(x=>x.id===c.id)){custom.cards.push({id:String(c.id),t:String(c.t),q:String(c.q),a:String(c.a),merk:String(c.merk||""),trap:String(c.trap||"")});nc++;}
+    persist(`Import: ${nt} Themen und ${nc} Karten ergänzt (vorhandene bleiben erhalten).`);
+  }catch(err){msg("Die Datei ist kein gültiger Lernkarten-Export.",true);} e.target.value="";};
+  r.readAsText(f);
+};
+document.getElementById("htmlBtn").onclick=()=>{
+  const root=document.documentElement.cloneNode(true);
+  root.querySelector("#embedded-custom").textContent=JSON.stringify(custom).replace(/</g,"\\u003c");
+  ["#deck","#list","#chips","#ownList","#bar","#pstats"].forEach(sel=>{const n=root.querySelector(sel);if(n)n.innerHTML="";});
+  root.querySelector("#ownPanel").hidden=true; root.removeAttribute("data-theme");
+  download(`M03-Lernkarten-mit-eigenen-Inhalten-${stamp()}.html`,"<!doctype html>\n"+root.outerHTML,"text/html");
+  msg("HTML gespeichert. Diese Datei enthält deine Inhalte fest eingebaut, auch auf anderen Geräten.");
+};
+
+let qt;
+function setQuery(v){query=v;document.getElementById("q").value=v;state.idx=0;flipped=false;render();}
+document.getElementById("q").addEventListener("input",e=>{clearTimeout(qt);const v=e.target.value;qt=setTimeout(()=>{query=v.trim();state.idx=0;flipped=false;render();},120);});
+document.getElementById("qx").onclick=()=>{setQuery("");document.getElementById("q").focus();};
+render();
+</script>
+</body>
+</html>
