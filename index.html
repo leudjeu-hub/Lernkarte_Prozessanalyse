@@ -160,6 +160,46 @@ code{font-family:ui-monospace,Menlo,Consolas,monospace;background:var(--surface2
 .list .item{--c:var(--t-all);--c2:var(--t-all2);background:var(--surface);border-radius:16px;border-left:6px solid var(--c);padding:14px 16px;margin-bottom:12px;box-shadow:0 2px 8px rgba(60,30,120,.06)}
 .list .item .qs{font-weight:800;font-size:1.02rem;margin:6px 0 8px;color:var(--text)}
 .list .item .topic{color:var(--muted)}
+/* Reiter */
+.tabs{display:flex;flex-wrap:wrap;gap:4px;margin:20px 0 0;background:var(--surface);border:1.5px solid var(--line);border-radius:999px;padding:4px;width:max-content;max-width:100%;box-shadow:0 2px 8px rgba(60,30,120,.06)}
+.tab{border:0;background:transparent;color:var(--muted);border-radius:999px;padding:8px 16px;white-space:nowrap;font-weight:800;font-size:.92rem;transition:background .12s,color .12s}
+.tab:hover{color:var(--text)}
+.tab[aria-selected="true"]{background:linear-gradient(135deg,#6366f1,#ec4899);color:#fff;box-shadow:0 6px 16px rgba(99,102,241,.3)}
+.tab:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+/* Quiz */
+.qz{--c:#6366f1;--c2:#db2777}
+.qintro{background:radial-gradient(circle at 100% 0%,rgba(255,255,255,.16) 0 120px,transparent 121px),linear-gradient(140deg,#6366f1,#db2777);color:#fff;border-radius:22px;padding:20px 22px;margin-top:18px;box-shadow:var(--shadow)}
+.qintro h2{margin:0;font-size:1.35rem;font-weight:900}
+.qintro .sub{margin:2px 0 10px;font-weight:700;opacity:.92}
+.qintro p{margin:0;font-size:.95rem}
+.qtools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0 16px}
+.qitem{background:var(--surface);border-radius:20px;border-left:6px solid var(--c);padding:16px 18px 18px;margin-bottom:14px;box-shadow:0 2px 8px rgba(60,30,120,.06)}
+.qitem .qn{display:inline-block;font-size:.72rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:linear-gradient(135deg,var(--c),var(--c2));border-radius:999px;padding:3px 10px}
+.qitem .qt{font-weight:800;font-size:1.04rem;line-height:1.45;margin:10px 0 12px}
+.opts{list-style:none;margin:0 0 12px;padding:0;display:grid;gap:8px}
+.opt{display:flex;gap:10px;align-items:flex-start;background:var(--surface2);border:1.5px solid transparent;border-radius:14px;padding:9px 12px;font-size:.95rem;transition:background .15s,border-color .15s,opacity .15s}
+.opt .ol{flex-shrink:0;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-weight:900;font-size:.82rem;background:var(--surface);color:var(--c2);border:1.5px solid var(--line)}
+:root[data-theme="dark"] .opt .ol{color:var(--accent)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .opt .ol{color:var(--accent)}}
+.opt .ot{padding-top:2px}
+.qitem.open .opt{opacity:.6}
+.qitem.open .opt.right{opacity:1;background:var(--ok-soft);border-color:var(--ok)}
+.qitem.open .opt.right .ol{background:var(--ok);color:var(--surface);border-color:var(--ok)}
+.sol{margin-top:12px;background:linear-gradient(135deg,color-mix(in srgb,var(--ok) 12%,var(--surface)),var(--surface));border-left:4px solid var(--ok);border-radius:12px;padding:10px 14px;font-size:.95rem}
+.sol .sr{font-weight:900;color:var(--ok);margin:0 0 4px}
+.sol p:last-child{margin:0}
+.revbtn[aria-expanded="true"]{background:var(--surface2)}
+.qitem .fhead{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.fcat{font-size:.72rem;font-weight:800;border-radius:999px;padding:2px 9px;border:1.5px solid currentColor;color:var(--fc)}
+.fans{margin-top:12px;background:linear-gradient(135deg,color-mix(in srgb,var(--fc) 12%,var(--surface)),var(--surface));border-left:4px solid var(--fc);border-radius:12px;padding:10px 14px;font-size:.95rem}
+.fans p{margin:0}
+.fans p+p,.fans p+ul,.fans p+ol,.fans ul+p,.fans ol+p,.fans .f+p{margin-top:8px}
+.fans ul,.fans ol{margin:6px 0 0;padding-left:22px}
+.fans li{margin:3px 0}
+.fans .trap{margin-top:10px}
+.fitem{border-left-color:var(--fc)}
+@media (max-width:520px){.qitem{padding:14px 14px 16px}.qintro{padding:18px 16px}.tab{padding:7px 10px;font-size:.84rem}.tabs{border-radius:20px}.tab .ti{display:none}}
+@media print{.tabs,.qtools,.revbtn{display:none}.qitem{break-inside:avoid;box-shadow:none}.qitem .sol{display:block!important}}
 @media (max-width:520px){.face{min-height:330px}.front{padding:18px 16px}.back{padding:16px 15px}.front .q{font-size:1.22rem}header h1{font-size:1.6rem}}
 @media (prefers-reduced-motion: reduce){.face,.btn,.chip,.progress i{transition:none}}
 @media print{body{background:#fff}.chips,.row,.nav,.kbd,.progress,.pstats,.top .btn{display:none}.list .item{break-inside:avoid;box-shadow:none}}
@@ -170,7 +210,7 @@ code{font-family:ui-monospace,Menlo,Consolas,monospace;background:var(--surface2
   <header class="top">
     <div>
       <h1>Lernkarten Modul 3</h1>
-      <p>Prozessanalyse und KPIs · abgeglichen mit Kapiteltexten Tag 1 bis 4 und Glossar · Pareto, Ursachen, KPIs, Wertstrom, ROI, Reife, Score-Modell, Pitch, Fälle Schmidt und Wagner</p>
+      <p>Prozessanalyse und KPIs · abgeglichen mit Kapiteltexten Tag 1 bis 4 und Glossar · Pareto, Ursachen, KPIs, Wertstrom, ROI, Reife, Score-Modell, Pitch, Fälle Schmidt und Wagner · dazu Quiz und Flashcards aus dem Kurs</p>
     </div>
     <div style="display:flex;gap:6px;flex-wrap:wrap">
       <button class="btn own-btn" id="ownBtn">＋ Eigene Inhalte</button>
@@ -211,6 +251,41 @@ code{font-family:ui-monospace,Menlo,Consolas,monospace;background:var(--surface2
     </div>
   </section>
 
+  <div class="tabs" role="tablist" aria-label="Bereich wählen">
+    <button class="tab" role="tab" id="tabCards" aria-controls="cardsView" aria-selected="true"><span class="ti">🃏 </span>Lernkarten</button>
+    <button class="tab" role="tab" id="tabQuiz" aria-controls="quizView" aria-selected="false"><span class="ti">📝 </span>M03: Quiz</button>
+    <button class="tab" role="tab" id="tabFlash" aria-controls="flashView" aria-selected="false"><span class="ti">⚡ </span>M03: Flashcards</button>
+  </div>
+
+  <section id="flashView" class="qz" role="tabpanel" aria-labelledby="tabFlash" hidden>
+    <div class="qintro">
+      <h2>M03: Flashcards (20 Karten)</h2>
+      <div class="sub">Flashcards Modul M03</div>
+      <p>20 Karten zum Selbst-Abfragen. Lies die Frage, beantworte sie für dich, und deck dann die Antwort auf. Nichts wird gespeichert.</p>
+    </div>
+    <div class="qtools">
+      <button class="btn" id="fcAll">Alle Antworten aufdecken</button>
+      <button class="btn" id="fcNone">Alle verbergen</button>
+      <span class="counter" id="fcCount"></span>
+    </div>
+    <div id="flashList"></div>
+  </section>
+
+  <section id="quizView" class="qz" role="tabpanel" aria-labelledby="tabQuiz" hidden>
+    <div class="qintro">
+      <h2>M03: Quiz</h2>
+      <div class="sub">Modul 3: Prozessanalyse und KPIs</div>
+      <p>Nur für dich. Kein Test, nichts wird gespeichert. Lies die Frage, überlege selbst, und deck dann die Lösung auf.</p>
+    </div>
+    <div class="qtools">
+      <button class="btn" id="qzAll">Alle Lösungen aufdecken</button>
+      <button class="btn" id="qzNone">Alle verbergen</button>
+      <span class="counter" id="qzCount"></span>
+    </div>
+    <div id="quizList"></div>
+  </section>
+
+  <div id="cardsView" role="tabpanel" aria-labelledby="tabCards">
   <div class="search">
     <span class="si">🔎</span>
     <input id="q" type="search" placeholder="Suchen: Begriff, Formel, Firma … (Taste /)" autocomplete="off" aria-label="Lernkarten durchsuchen">
@@ -260,13 +335,14 @@ code{font-family:ui-monospace,Menlo,Consolas,monospace;background:var(--surface2
       <li><span class="tag allg">Nicht aus Kursquelle</span> allgemeines Fachwissen, im Kursmaterial nicht belegt.</li>
     </ul>
   </div>
+  </div>
 </div>
 
 <script type="application/json" id="embedded-custom">null</script>
 <script>
 const TOPICS = {
   grund:"Grundbegriffe", pareto:"Pareto", ursache:"Ishikawa & 5-Why", kpi:"KPI & Steckbrief",
-  wert:"Wertstrom & PCE", roi:"ROI", reife:"Reife & Daten", score:"Score-Modell", pitch:"Pitch", fall:"Fälle Schmidt & Wagner", flash:"Flashcards (Kurs)", sum:"Modul-Zusammenfassung"
+  wert:"Wertstrom & PCE", roi:"ROI", reife:"Reife & Daten", score:"Score-Modell", pitch:"Pitch", fall:"Fälle Schmidt & Wagner", sum:"Modul-Zusammenfassung"
 };
 const ICON={grund:"📘",pareto:"📊",ursache:"🐟",kpi:"🎯",wert:"🔄",roi:"💶",reife:"🪜",score:"🏆",pitch:"🎤",fall:"🏢",flash:"🃏",sum:"🧭"};
 const SRC = {own:"Eigene Karte", kurs:"Kurstext/Glossar", cs:"Cheat-Sheet", fall:"Fall A01/A02", calc:"Eigene Rechnung", allg:"Nicht aus Kursquelle"};
@@ -559,52 +635,6 @@ Aufwand = 6 − Aufwand-Score          (1 bis 5)</code><p>Befund: Regress und Wa
  a:`<ul><li>4,8 h Chef-Zeit pro Tag mit Wagner prüfen (eine Woche Strichliste)</li><li>Warenwert/Gewicht der 50 offenen Schmidt-Brüche (HGB § 431)</li><li>Sendungsvolumen je Sub bei Schmidt</li><li>Sind die 2.050 € der Orga-Stufe schon verdoppelt?</li></ul>`},
 {t:"fall",s:"fall",q:"Für Modul 4: Welcher Top-3-Kandidat ist am KI-tauglichsten und warum?",
  a:`<p><b>Schmidt-Regress</b>: Schadensunterlagen lesen und Regressschreiben vorbereiten ist typische Arbeit für Sprach-KI, und es gibt 200 echte WMS-Fälle als Datenbasis.</p>`},
-/* ---------- Flashcards (Kurs, 20 Karten) ---------- */
-{t:"flash",s:"kurs",k:"Konzept",q:"Flashcard: Was besagt das Pareto-Prinzip (80/20-Regel)?",
- a:`<p>Eine kleine Anzahl von Ursachen (ca. 20 %) ist für den Großteil der Auswirkungen (ca. 80 %) verantwortlich. Es hilft dir, dich auf die wichtigsten Probleme zu konzentrieren, statt dich in Details zu verlieren.</p>`},
-{t:"flash",s:"kurs",k:"Beispiel",q:"Flashcard: Pareto-Anwendung bei Schmidt Logistik?",
- a:`<p>Die Analyse der 200 Schadensfälle zeigt: <b>Drei von sieben Schadensarten</b> (Transportbruch, Falschauslieferung, Verlust/Diebstahl) verursachen <b>158 von 200 Fällen, also 79 %</b>. Eine typische Pareto-Verteilung, die zeigt, wo du als Erstes ansetzen solltest.</p>`,
- trap:`Nicht verwechseln mit „104 von 200 Fällen, 75 % der Schadenssumme“ aus A01: Das ist die Auswertung nach <b>Prozessstelle</b> (Transport/Übergabe an Subunternehmer), hier geht es um <b>Schadensarten</b>. Zwei Aggregationsebenen, beide richtig.`},
-{t:"flash",s:"kurs",k:"Methode",q:"Flashcard: Was ist ein Ishikawa-Diagramm (Fischgrätendiagramm)?",
- a:`<p>Eine Methode zur Ursachenanalyse. Du visualisierst mögliche Ursachen eines Problems, sortiert nach den <b>6M-Kategorien</b> (Mensch, Maschine, Methode, Material, Mitwelt, Messung), um die Wurzel des Problems zu finden.</p>`},
-{t:"flash",s:"kurs",k:"Methode",q:"Flashcard: Wie funktioniert die 5-Why-Methode?",
- a:`<p>Du fragst <b>fünfmal hintereinander „Warum?“</b>, um von einem oberflächlichen Problem zur eigentlichen, <b>veränderbaren Grundursache</b> vorzudringen. So vermeidest du reine Symptombekämpfung.</p>`},
-{t:"flash",s:"kurs",k:"Definition",q:"Flashcard: Was ist ein Key Performance Indicator (KPI)?",
- a:`<p>Eine Kennzahl, die den Fortschritt bei der Erreichung wichtiger Ziele misst. Ein guter KPI ist <b>messbar, relevant und an eine konkrete Handlung gekoppelt</b>. Er hilft dir, die Leistung eines Prozesses zu steuern.</p>`},
-{t:"flash",s:"kurs",k:"Konzept",q:"Flashcard: Nenne zwei typische Fallen bei der Definition von KPIs.",
- a:`<ol><li><b>Fehlanreiz</b>: Der KPI belohnt Verhalten, das dem Gesamtziel schadet.</li><li><b>Manipulation</b>: Mitarbeiter können den KPI-Wert schönen, ohne die tatsächliche Leistung zu verbessern.</li></ol><p>Wähle deine KPIs daher sorgfältig.</p>`,
- trap:`Verwandt: Goodharts Gesetz und das Steckbrief-Feld „Anti-Falle“.`},
-{t:"flash",s:"kurs",k:"Methode",q:"Flashcard: Was ist das Ziel einer Wertstromanalyse?",
- a:`<p>Sie visualisiert alle Schritte eines Prozesses, um <b>wertschöpfende Tätigkeiten von Verschwendung</b> (Warten, Nacharbeit) zu unterscheiden. Ziel: den <b>Fluss verbessern</b> und die <b>Durchlaufzeit verkürzen</b>.</p>`},
-{t:"flash",s:"kurs",k:"Definition",q:"Flashcard: Unterschied: Durchlaufzeit (DLZ) vs. Bearbeitungszeit (PT)?",
- a:`<p><b>Bearbeitungszeit</b> = die reine, wertschöpfende Arbeitszeit.</p><p><b>Durchlaufzeit</b> = die Gesamtzeit vom Start bis zum Ende, inklusive aller Warte- und Liegezeiten.</p><p>Oft ist die PT (in M02 auch B/Z genannt) nur ein Bruchteil der DLZ.</p>`},
-{t:"flash",s:"kurs",k:"Beispiel",q:"Flashcard: Was zeigt die Wertstromanalyse bei den Wagner-Filialen?",
- a:`<p>Bearbeitungszeit <b>58 Minuten</b>, Durchlaufzeit <b>rund 14,5 Stunden</b>. Der Großteil ist Verschwendung (Warten auf Wagner, Sammeln von Bestellungen). Hier liegt das größte Potenzial.</p>`},
-{t:"flash",s:"kurs",k:"Definition",q:"Flashcard: Was misst die Process Cycle Efficiency (PCE)?",
- a:`<p>Das Verhältnis von Bearbeitungszeit zu Durchlaufzeit:</p><code class="f">Gesamt-PCE = Σ PT / DLZ × 100,   DLZ = Σ (PT + WT)</code><p>Sie zeigt den Anteil der wertschöpfenden Zeit. Bei Wagner nur <b>6,7 %</b>, typisch für Büroprozesse.</p>`},
-{t:"flash",s:"kurs",k:"Konzept",q:"Flashcard: Was ist ein Soll-Wertstrom?",
- a:`<p>Ein Entwurf, wie ein Prozess in Zukunft idealerweise aussehen sollte. Er entsteht aus der Analyse des Ist-Zustands und zielt darauf ab, <b>Verschwendung gezielt zu eliminieren</b> und den Fluss zu optimieren, <b>statt nur schneller zu arbeiten</b>.</p>`},
-{t:"flash",s:"kurs",k:"Anwendung",q:"Flashcard: Wofür nutzt du ein ROI-Modell bei Prozessverbesserungen?",
- a:`<p>Um die <b>Wirtschaftlichkeit</b> einer Investition zu belegen. Du stellst die <b>einmaligen Kosten</b> (z. B. Software) den <b>laufenden Einsparungen</b> (z. B. gesparte Arbeitszeit) gegenüber, um zu zeigen, <b>wann sich die Maßnahme rechnet</b>.</p>`},
-{t:"flash",s:"kurs",k:"Konzept",q:"Flashcard: Was beschreiben die CMMI-Reifegrade?",
- a:`<p>CMMI beschreibt die Reife von Prozessen in 5 Stufen: <b>initial (1)</b>, <b>gemanagt (2)</b>, <b>definiert (3)</b>, <b>quantitativ gemanagt (4)</b>, <b>optimierend (5)</b>.</p><p>Im Kurs arbeitest du mit einem Reife-Score von 1 bis 5, der aus diesen Stufen <b>remappt</b> ist.</p>`,
- trap:`Wie genau remappt wird, ist im Kursmaterial uneinheitlich: Kapitel 4 legt Score 4 = datenbasiert gesteuert (≈ CMMI 4) fest, das Score-Cheat-Sheet gibt schon für CMMI 4+ die volle 5.`},
-{t:"flash",s:"kurs",k:"Tool",q:"Flashcard: Was ist der Kern von Process Mining?",
- a:`<p>Die automatische Analyse von digitalen Spuren (<b>Event-Logs</b>) in IT-Systemen, um den <b>tatsächlichen Prozessablauf</b> zu rekonstruieren. Es deckt Abweichungen vom Soll-Prozess, Engpässe und Ineffizienzen auf.</p>`},
-{t:"flash",s:"kurs",k:"Methode",q:"Flashcard: Was ist eine ABC-Klassifizierung?",
- a:`<p>Eine Methode, um Elemente nach Wichtigkeit zu sortieren:</p><ul><li><b>A</b>: die wichtigsten (wenige, aber hoher Wert/Anteil)</li><li><b>B</b>: mittelwichtig</li><li><b>C</b>: unwichtig (viele, aber geringer Wert/Anteil)</li></ul>`},
-{t:"flash",s:"kurs",k:"Konzept",q:"Flashcard: Was ist ein typischer Anwendungsfehler des Pareto-Prinzips?",
- a:`<p>Zu glauben, man könne die <b>B- und C-Fälle komplett ignorieren</b>. Das Prinzip hilft bei der Priorisierung, aber auch kleine, seltene Probleme können kritisch sein oder sich mit der Zeit zu A-Problemen entwickeln.</p>`},
-{t:"flash",s:"kurs",k:"Tool",q:"Flashcard: Welche Elemente gehören in einen guten KPI-Steckbrief?",
- a:`<p>Formel, Datenquelle, Messintervall, Zielwert, Schwellwerte (z. B. rot/gelb/grün) und ein klar benannter Verantwortlicher. Das sorgt für <b>Eindeutigkeit und Verbindlichkeit</b>.</p>`,
- trap:`Die vierte Variante der Feldliste (hier 6 Felder ohne Name). Vollständig ist die 9-Felder-Liste aus dem Cheat-Sheet.`},
-{t:"flash",s:"kurs",k:"Konzept",q:"Flashcard: Was ist eine Balanced Scorecard (BSC)?",
- a:`<p>Ein Rahmenwerk für KPIs aus <b>vier Perspektiven</b>: Finanzen, Kunden, interne Prozesse, Lernen und Entwicklung. Es verhindert eine einseitige Steuerung nur nach Finanzkennzahlen.</p>`},
-{t:"flash",s:"kurs",k:"Anwendung",q:"Flashcard: Warum haben Stakeholder unterschiedliche KPI-Interessen?",
- a:`<p>Der <b>Geschäftsführer</b> will strategische Finanz-KPIs, der <b>Filialleiter</b> operative KPIs für den Tagesbetrieb, die <b>IT</b> achtet auf Systemleistung. Ein gutes Cockpit muss diese Sichten ausbalancieren.</p>`,
- trap:`Leichte Abweichung zum Stakeholder-Cheat-Sheet: Dort will die IT vor allem die <b>Datenpflege minimieren</b> (jede KPI = eine Pipeline), nicht Systemleistung messen.`},
-{t:"flash",s:"kurs",k:"Beispiel",q:"Flashcard: Schmidt Logistik: Warum Pareto nach Wert und Anzahl vergleichen?",
- a:`<p>Der <b>häufigste</b> Schaden (Transportbruch) ist nicht der <b>teuerste</b>. Der deutlich seltenere <b>Verlust/Diebstahl</b> verursacht den höchsten Schadenswert in Euro.</p><p>Beide Sichten sind wichtig: eine zur <b>Prozessoptimierung</b>, die andere zur <b>Risikosteuerung</b>.</p>`},
 /* ---------- Modul-Zusammenfassung ---------- */
 {t:"sum",s:"kurs",k:"Überblick",q:"Worum geht es in Modul 3 (Prozessanalyse und KPIs)?",
  a:`<p>Geschäftsprozesse <b>systematisch untersuchen und verbessern</b>: weg vom Bauchgefühl, hin zu <b>datenbasierten Entscheidungen</b>.</p><ul><li>wahre Ursachen für Verschwendung, Fehler, Verzögerungen finden</li><li>Prozessleistung mit KPIs messbar machen und gezielt optimieren</li></ul><p>Ziel: Abläufe nicht nur schneller, sondern <b>grundlegend besser</b> gestalten.</p>`},
@@ -657,6 +687,8 @@ function ownCardObj(o){return {t:o.t,s:"own",own:true,oid:o.id,q:o.q,a:fmtOwn(o.
 function applyCustomTopics(){
   for(const k of Object.keys(TOPICS)) if(!BASE_TOPICS.includes(k)) {delete TOPICS[k];delete ICON[k];}
   for(const t of custom.topics){TOPICS[t.id]=t.name;ICON[t.id]=t.icon||"⭐";}
+  /* Die Kurs-Flashcards haben jetzt einen eigenen Reiter. Früher selbst angelegte Karten im Thema „Flashcards“ bleiben als Lernkarten sichtbar. */
+  if(custom.cards.some(c=>c.t==="flash")) TOPICS.flash="Flashcards (eigene)";
 }
 applyCustomTopics();
 for(const o of custom.cards) if(TOPICS[o.t]) CARDS.push(ownCardObj(o));
@@ -672,6 +704,7 @@ if(!state.order) state.order=IDS.slice();
 state.order=state.order.filter(id=>IDS.includes(id)).concat(IDS.filter(id=>!state.order.includes(id)));
 const BYID=Object.fromEntries(CARDS.map(c=>[c.id,c]));
 let flipped=false;
+if(state.topic!=="all"&&!TOPICS[state.topic]) state.topic="all";
 
 let query="";
 const norm=t=>t.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/ß/g,"ss");
@@ -787,6 +820,7 @@ document.getElementById("viewBtn").onclick=()=>{state.view=state.view==="deck"?"
 document.getElementById("themeBtn").onclick=()=>{const r=document.documentElement;const dark=r.dataset.theme?r.dataset.theme==="dark":matchMedia("(prefers-color-scheme: dark)").matches;r.dataset.theme=dark?"light":"dark";try{localStorage.setItem(KEY+"-theme",r.dataset.theme);}catch(e){}};
 try{const t=localStorage.getItem(KEY+"-theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}
 document.addEventListener("keydown",e=>{
+  if(typeof activeTab!=="undefined"&&activeTab!=="cards") return;
   if(e.key==="/"&&e.target.tagName!=="INPUT"){e.preventDefault();document.getElementById("q").focus();return;}
   if(e.target.id==="q"){if(e.key==="Escape"){setQuery("");e.target.blur();}return;}
   if(state.view!=="deck"||e.target.tagName==="SELECT")return;
@@ -873,6 +907,10 @@ document.getElementById("htmlBtn").onclick=()=>{
   root.querySelector("#embedded-custom").textContent=JSON.stringify(custom).replace(/</g,"\\u003c");
   ["#deck","#list","#chips","#ownList","#bar","#pstats"].forEach(sel=>{const n=root.querySelector(sel);if(n)n.innerHTML="";});
   root.querySelector("#ownPanel").hidden=true; root.removeAttribute("data-theme");
+  root.querySelector("#quizList").innerHTML=""; root.querySelector("#quizView").hidden=true; root.querySelector("#cardsView").hidden=false;
+  root.querySelector("#flashList").innerHTML=""; root.querySelector("#flashView").hidden=true;
+  root.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-selected",t.id==="tabCards"));
+  root.querySelector("#viewBtn").hidden=false; root.querySelector("#ownBtn").hidden=false;
   download(`M03-Lernkarten-mit-eigenen-Inhalten-${stamp()}.html`,"<!doctype html>\n"+root.outerHTML,"text/html");
   msg("HTML gespeichert. Diese Datei enthält deine Inhalte fest eingebaut, auch auf anderen Geräten.");
 };
@@ -881,6 +919,164 @@ let qt;
 function setQuery(v){query=v;document.getElementById("q").value=v;state.idx=0;flipped=false;render();}
 document.getElementById("q").addEventListener("input",e=>{clearTimeout(qt);const v=e.target.value;qt=setTimeout(()=>{query=v.trim();state.idx=0;flipped=false;render();},120);});
 document.getElementById("qx").onclick=()=>{setQuery("");document.getElementById("q").focus();};
+
+/* ---------- M03: Quiz (nichts wird gespeichert) ---------- */
+const QUIZ=[
+{q:"Du hast bei Schmidt Logistik die Schadensfälle nach Häufigkeit analysiert und eine klare Pareto-Verteilung gefunden. Was ist der wichtigste nächste Schritt, um das Problem nachhaltig zu lösen?",
+ o:["Den häufigsten Schadensfall („Transportbruch“) mit einer Ursachenanalyse wie Ishikawa oder 5-Why untersuchen.",
+    "Sofort alle Verlademitarbeiter nachschulen, da der Transportbruch beim Verladen entstehen muss.",
+    "Zuerst eine Analyse nach Schadenswert in Euro durchführen, da die teuersten Schäden Priorität haben sollten.",
+    "Ein KPI-Cockpit für alle Schadensarten aufbauen, um die Entwicklung wöchentlich zu verfolgen."],
+ r:0, e:"Die Pareto-Analyse identifiziert die wichtigsten Problemfelder. Der logische nächste Schritt ist, die Ursache des größten Problems zu verstehen, bevor man voreilig Lösungen entwickelt."},
+{q:"Im Wertstrom des Bestellprozesses bei den Wagner-Filialen beträgt die reine Bearbeitungszeit (PT) 58 Minuten, die Durchlaufzeit aber rund 14,5 Stunden. Wo liegt laut den Daten der größte Hebel zur Verbesserung?",
+ o:["In der Schulung von Frau Berger, um ihre Bearbeitungszeit bei der Bedarfsschätzung zu senken.",
+    "In der Anschaffung einer schnelleren Software für die Dateneingabe durch Herrn Wagner.",
+    "In der Reduzierung der Wartezeiten, zum Beispiel durch die Abschaffung von Anrufen und Zettelwirtschaft.",
+    "In der Optimierung der Tourenplanung des Fahrers, um die Auslieferung zu beschleunigen."],
+ r:2, e:"Die Analyse zeigt, dass die Wartezeiten die Durchlaufzeit dominieren. Die größten Verbesserungen werden durch die Eliminierung von Liege- und Wartezeiten erzielt, nicht durch die Optimierung der kurzen Bearbeitungszeiten."},
+{q:"Bei der Entwicklung eines KPI-Cockpits für den Bestellprozess der Wagner-Filialen stellst du fest, dass die Filialleiterin und der Geschäftsführer unterschiedliche Prioritäten haben. Welche KPI ist typischerweise für die Filialleiterin wichtiger als für den Geschäftsführer?",
+ o:["Die Prozesskosten pro Bestellung.",
+    "Die Process Cycle Efficiency (PCE) des Gesamtprozesses.",
+    "Die Fehlerquote bei der eigenen Bedarfsschätzung am Morgen.",
+    "Die durchschnittliche Durchlaufzeit aller Bestellungen pro Monat."],
+ r:2, e:"Die Filialleiterin ist an operativen Kennzahlen interessiert, die ihre tägliche Arbeit direkt betreffen und die sie beeinflussen kann. Der Geschäftsführer fokussiert auf aggregierte Kennzahlen wie Gesamtkosten oder Durchlaufzeiten."},
+{q:"Die Schmidt-Logistik führt die KPI „Anzahl bearbeiteter Kundenanfragen pro Disponent pro Tag“ ein. Welcher typischen KPI-Falle läuft diese Kennzahl am ehesten Gefahr, zum Opfer zu fallen?",
+ o:["Fehlanreiz, der zu Lasten der Qualität geht.",
+    "Falsche Aggregationsebene.",
+    "Datenquellen-Wahn.",
+    "Manipulation durch den Geschäftsführer."],
+ r:0, e:"Eine rein quantitative Messung ohne qualitative Komponente (z. B. Lösungsquote) schafft einen Anreiz, Anfragen schnell, aber nicht unbedingt gut und nachhaltig zu bearbeiten."},
+{q:"Du sollst für den Geschäftsführer der Wagner-Filialen ein ROI-Modell für eine neue Bestell-App erstellen. Was ist die wichtigste Komponente auf der „Return“-Seite deiner Rechnung?",
+ o:["Die einmaligen Lizenzkosten für die neue Software.",
+    "Die monatlich eingesparte Arbeitszeit von Frau Berger und Herrn Wagner, bewertet mit deren Stundensätzen.",
+    "Die erwartete Umsatzsteigerung durch eine höhere Kundenzufriedenheit.",
+    "Die Kosten für die Schulung der Mitarbeiter auf die neue App."],
+ r:1, e:"Der „Return“ berechnet sich primär aus den eingesparten Kosten. Im Fall Wagner ist das die Arbeitszeit der Beteiligten, die durch die Automatisierung frei wird und nun wertschöpfender eingesetzt werden kann."},
+{q:"Im Rahmen einer Ishikawa-Analyse zum Problem „Transportbruch“ bei Schmidt Logistik wird die Ursache „Die Gabelstapler sind veraltet und haben oft Aussetzer“ genannt. In welche der 6M-Kategorien gehört diese Ursache?",
+ o:["Mensch","Maschine","Methode","Mitwelt"],
+ r:1, e:"Das Arbeitsgerät, in diesem Fall der Gabelstapler, fällt eindeutig in die Kategorie „Maschine“. Die Bedienung durch den Fahrer wäre „Mensch“, der Verladeprozess an sich „Methode“."},
+{q:"Der Prozess zur Medikamentenausgabe im Pflegeheim Tannenhof ist dokumentiert und wird im Großen und Ganzen befolgt. Es gibt aber individuelle Abweichungen und keine Messungen zur Fehlerquote. Welchen Reife-Score (1–5, remappt aus CMMI) vergibst du für diesen Prozess am ehesten?",
+ o:["Score 1: heldengetrieben, hängt an einer Person",
+    "Score 2: wiederholbar, aber nur im Kopf des Teams",
+    "Score 3: dokumentiert und stabil wiederholbar",
+    "Score 4: dokumentiert plus erste Messpunkte"],
+ r:2, e:"Der Prozess ist dokumentiert und läuft stabil, das entspricht Score 3 auf der Kurs-Skala (remappt aus den CMMI-Stufen 2–3). Für Score 4 fehlen erste Messpunkte, zum Beispiel eine erfasste Fehlerquote."},
+{q:"Du präsentierst deine Pareto-Analyse der Schadensfälle bei Schmidt Logistik. Der Geschäftsführer ist überrascht, dass „Temperaturschaden“ (nur 8 von 200 Fällen) als C-Kategorie eingestuft wird, obwohl ihn einzelne Fälle teuer zu stehen kamen. Was ist deine beste Erwiderung, basierend auf den Kursinhalten?",
+ o:["„Das ist korrekt für die Analyse nach Fallzahl. Eine zweite Analyse nach Schadenswert in Euro rückt den Temperaturschaden deutlich weiter nach vorn.“",
+    "„Das Pareto-Prinzip besagt, dass wir uns auf die häufigsten Fälle konzentrieren müssen. Die seltenen Fälle können wir vernachlässigen.“",
+    "„Die Datenbasis mit 200 Fällen ist nicht repräsentativ. Wir sollten erst mehr Daten sammeln, bevor wir den Temperaturschaden bewerten.“",
+    "„Wir sollten den Temperaturschaden sofort mit der 5-Why-Methode untersuchen, da er auf ein Kühlketten-Problem hindeutet.“"],
+ r:0, e:"Die Kursunterlagen weisen explizit darauf hin, dass die teuersten Probleme nicht immer die häufigsten sind. Eine gute Analyse betrachtet verschiedene Dimensionen wie Häufigkeit und Kosten."},
+{q:"Die Hoffmann-Steuerberatung möchte die Qualität der erstellten Steuererklärungen messen. Welcher Eintrag ist im Feld „Formel“ eines KPI-Steckbriefs für die „Erst-Korrekt-Quote“ am präzisesten?",
+ o:["Die durchschnittliche Zufriedenheit der Mandanten auf einer Skala von 1 bis 10.",
+    "(Anzahl der ohne Rückfrage des Finanzamts akzeptierten Erklärungen / Anzahl aller eingereichten Erklärungen) × 100.",
+    "Anzahl der Beschwerden von Mandanten pro Monat.",
+    "Die Bearbeitungszeit pro Steuererklärung in Stunden."],
+ r:1, e:"Eine gute KPI-Formel ist exakt und unmissverständlich. Die „Erst-Korrekt-Quote“ misst, wie viele Prozesseinheiten auf Anhieb fehlerfrei sind, was die Formel präzise abbildet."}
+];
+const LET="ABCD";
+function renderQuiz(){
+  document.getElementById("quizList").innerHTML=QUIZ.map((x,i)=>`<article class="qitem" id="qz${i}">
+    <span class="qn">Frage ${i+1}</span>
+    <div class="qt">${esc(x.q)}</div>
+    <ol class="opts">${x.o.map((o,j)=>`<li class="opt${j===x.r?" right":""}"><span class="ol">${LET[j]}</span><span class="ot">${esc(o)}</span></li>`).join("")}</ol>
+    <button class="btn revbtn" data-qz="${i}" aria-expanded="false" aria-controls="qzs${i}">Lösung aufdecken</button>
+    <div class="sol" id="qzs${i}" hidden><p class="sr">Richtig: ${LET[x.r]}</p><p>${esc(x.e)}</p>${x.n?`<div class="trap"><b>⚠ Kritischer Hinweis (eigene Ergänzung, nicht aus dem Kurs):</b> ${x.n}</div>`:""}</div>
+  </article>`).join("");
+  quizCount();
+}
+function setRev(i,on){
+  const it=document.getElementById("qz"+i), b=it.querySelector(".revbtn");
+  it.classList.toggle("open",on); document.getElementById("qzs"+i).hidden=!on;
+  b.setAttribute("aria-expanded",on); b.textContent=on?"Lösung verbergen":"Lösung aufdecken";
+}
+function quizCount(){const n=document.querySelectorAll("#quizList .qitem.open").length;document.getElementById("qzCount").textContent=`${n} von ${QUIZ.length} Lösungen aufgedeckt`;}
+document.getElementById("quizList").onclick=e=>{const b=e.target.closest("[data-qz]");if(!b)return;const i=+b.dataset.qz;setRev(i,!document.getElementById("qz"+i).classList.contains("open"));quizCount();};
+document.getElementById("qzAll").onclick=()=>{QUIZ.forEach((_,i)=>setRev(i,true));quizCount();};
+document.getElementById("qzNone").onclick=()=>{QUIZ.forEach((_,i)=>setRev(i,false));quizCount();};
+
+/* ---------- M03: Flashcards (nichts wird gespeichert) ---------- */
+const FC_COL={Definition:"#6366f1",Konzept:"#8b5cf6",Methode:"#0ea5e9",Beispiel:"#10b981",Anwendung:"#f59e0b",Tool:"#f43f5e"};
+const FLASH=[
+{k:"Konzept",q:"Was besagt das Pareto-Prinzip (80/20-Regel)?",
+ a:`<p>Eine kleine Anzahl von Ursachen (ca. 20 %) ist für den Großteil der Auswirkungen (ca. 80 %) verantwortlich. Es hilft dir, dich auf die wichtigsten Probleme zu konzentrieren, statt dich in Details zu verlieren.</p>`},
+{k:"Beispiel",q:"Pareto-Anwendung bei Schmidt Logistik?",
+ a:`<p>Die Analyse der 200 Schadensfälle zeigt: <b>Drei von sieben Schadensarten</b> (Transportbruch, Falschauslieferung, Verlust/Diebstahl) verursachen <b>158 von 200 Fällen, also 79 %</b>. Eine typische Pareto-Verteilung, die zeigt, wo du als Erstes ansetzen solltest.</p>`,
+ trap:`Nicht verwechseln mit „104 von 200 Fällen, 75 % der Schadenssumme“ aus A01: Das ist die Auswertung nach <b>Prozessstelle</b> (Transport/Übergabe an Subunternehmer), hier geht es um <b>Schadensarten</b>. Zwei Aggregationsebenen, beide richtig.`},
+{k:"Methode",q:"Was ist ein Ishikawa-Diagramm (Fischgrätendiagramm)?",
+ a:`<p>Eine Methode zur Ursachenanalyse. Du visualisierst mögliche Ursachen eines Problems, sortiert nach den <b>6M-Kategorien</b> (Mensch, Maschine, Methode, Material, Mitwelt, Messung), um die Wurzel des Problems zu finden.</p>`},
+{k:"Methode",q:"Wie funktioniert die 5-Why-Methode?",
+ a:`<p>Du fragst <b>fünfmal hintereinander „Warum?“</b>, um von einem oberflächlichen Problem zur eigentlichen, <b>veränderbaren Grundursache</b> vorzudringen. So vermeidest du reine Symptombekämpfung.</p>`},
+{k:"Definition",q:"Was ist ein Key Performance Indicator (KPI)?",
+ a:`<p>Eine Kennzahl, die den Fortschritt bei der Erreichung wichtiger Ziele misst. Ein guter KPI ist <b>messbar, relevant und an eine konkrete Handlung gekoppelt</b>. Er hilft dir, die Leistung eines Prozesses zu steuern.</p>`},
+{k:"Konzept",q:"Nenne zwei typische Fallen bei der Definition von KPIs.",
+ a:`<ol><li><b>Fehlanreiz</b>: Der KPI belohnt Verhalten, das dem Gesamtziel schadet.</li><li><b>Manipulation</b>: Mitarbeiter können den KPI-Wert schönen, ohne die tatsächliche Leistung zu verbessern.</li></ol><p>Wähle deine KPIs daher sorgfältig.</p>`,
+ trap:`Verwandt: Goodharts Gesetz und das Steckbrief-Feld „Anti-Falle“.`},
+{k:"Methode",q:"Was ist das Ziel einer Wertstromanalyse?",
+ a:`<p>Sie visualisiert alle Schritte eines Prozesses, um <b>wertschöpfende Tätigkeiten von Verschwendung</b> (Warten, Nacharbeit) zu unterscheiden. Ziel: den <b>Fluss verbessern</b> und die <b>Durchlaufzeit verkürzen</b>.</p>`},
+{k:"Definition",q:"Unterschied: Durchlaufzeit (DLZ) vs. Bearbeitungszeit (PT)?",
+ a:`<p><b>Bearbeitungszeit</b> = die reine, wertschöpfende Arbeitszeit.</p><p><b>Durchlaufzeit</b> = die Gesamtzeit vom Start bis zum Ende, inklusive aller Warte- und Liegezeiten.</p><p>Oft ist die PT (in M02 auch B/Z genannt) nur ein Bruchteil der DLZ.</p>`},
+{k:"Beispiel",q:"Was zeigt die Wertstromanalyse bei den Wagner-Filialen?",
+ a:`<p>Bearbeitungszeit <b>58 Minuten</b>, Durchlaufzeit <b>rund 14,5 Stunden</b>. Der Großteil ist Verschwendung (Warten auf Wagner, Sammeln von Bestellungen). Hier liegt das größte Potenzial.</p>`},
+{k:"Definition",q:"Was misst die Process Cycle Efficiency (PCE)?",
+ a:`<p>Das Verhältnis von Bearbeitungszeit zu Durchlaufzeit:</p><code class="f">Gesamt-PCE = Σ PT / DLZ × 100,   DLZ = Σ (PT + WT)</code><p>Sie zeigt den Anteil der wertschöpfenden Zeit. Bei Wagner nur <b>6,7 %</b>, typisch für Büroprozesse.</p>`},
+{k:"Konzept",q:"Was ist ein Soll-Wertstrom?",
+ a:`<p>Ein Entwurf, wie ein Prozess in Zukunft idealerweise aussehen sollte. Er entsteht aus der Analyse des Ist-Zustands und zielt darauf ab, <b>Verschwendung gezielt zu eliminieren</b> und den Fluss zu optimieren, <b>statt nur schneller zu arbeiten</b>.</p>`},
+{k:"Anwendung",q:"Wofür nutzt du ein ROI-Modell bei Prozessverbesserungen?",
+ a:`<p>Um die <b>Wirtschaftlichkeit</b> einer Investition zu belegen. Du stellst die <b>einmaligen Kosten</b> (z. B. Software) den <b>laufenden Einsparungen</b> (z. B. gesparte Arbeitszeit) gegenüber, um zu zeigen, <b>wann sich die Maßnahme rechnet</b>.</p>`},
+{k:"Konzept",q:"Was beschreiben die CMMI-Reifegrade?",
+ a:`<p>CMMI beschreibt die Reife von Prozessen in 5 Stufen: <b>initial (1)</b>, <b>gemanagt (2)</b>, <b>definiert (3)</b>, <b>quantitativ gemanagt (4)</b>, <b>optimierend (5)</b>.</p><p>Im Kurs arbeitest du mit einem Reife-Score von 1 bis 5, der aus diesen Stufen <b>remappt</b> ist.</p>`,
+ trap:`Wie genau remappt wird, ist im Kursmaterial uneinheitlich: Kapitel 4 legt Score 4 = datenbasiert gesteuert (≈ CMMI 4) fest, das Score-Cheat-Sheet gibt schon für CMMI 4+ die volle 5.`},
+{k:"Tool",q:"Was ist der Kern von Process Mining?",
+ a:`<p>Die automatische Analyse von digitalen Spuren (<b>Event-Logs</b>) in IT-Systemen, um den <b>tatsächlichen Prozessablauf</b> zu rekonstruieren. Es deckt Abweichungen vom Soll-Prozess, Engpässe und Ineffizienzen auf.</p>`},
+{k:"Methode",q:"Was ist eine ABC-Klassifizierung?",
+ a:`<p>Eine Methode, um Elemente nach Wichtigkeit zu sortieren:</p><ul><li><b>A</b>: die wichtigsten (wenige, aber hoher Wert/Anteil)</li><li><b>B</b>: mittelwichtig</li><li><b>C</b>: unwichtig (viele, aber geringer Wert/Anteil)</li></ul>`},
+{k:"Konzept",q:"Was ist ein typischer Anwendungsfehler des Pareto-Prinzips?",
+ a:`<p>Zu glauben, man könne die <b>B- und C-Fälle komplett ignorieren</b>. Das Prinzip hilft bei der Priorisierung, aber auch kleine, seltene Probleme können kritisch sein oder sich mit der Zeit zu A-Problemen entwickeln.</p>`},
+{k:"Tool",q:"Welche Elemente gehören in einen guten KPI-Steckbrief?",
+ a:`<p>Formel, Datenquelle, Messintervall, Zielwert, Schwellwerte (z. B. rot/gelb/grün) und ein klar benannter Verantwortlicher. Das sorgt für <b>Eindeutigkeit und Verbindlichkeit</b>.</p>`,
+ trap:`Die vierte Variante der Feldliste (hier 6 Felder ohne Name). Vollständig ist die 9-Felder-Liste aus dem Cheat-Sheet.`},
+{k:"Konzept",q:"Was ist eine Balanced Scorecard (BSC)?",
+ a:`<p>Ein Rahmenwerk für KPIs aus <b>vier Perspektiven</b>: Finanzen, Kunden, interne Prozesse, Lernen und Entwicklung. Es verhindert eine einseitige Steuerung nur nach Finanzkennzahlen.</p>`},
+{k:"Anwendung",q:"Warum haben Stakeholder unterschiedliche KPI-Interessen?",
+ a:`<p>Der <b>Geschäftsführer</b> will strategische Finanz-KPIs, der <b>Filialleiter</b> operative KPIs für den Tagesbetrieb, die <b>IT</b> achtet auf Systemleistung. Ein gutes Cockpit muss diese Sichten ausbalancieren.</p>`,
+ trap:`Leichte Abweichung zum Stakeholder-Cheat-Sheet: Dort will die IT vor allem die <b>Datenpflege minimieren</b> (jede KPI = eine Pipeline), nicht Systemleistung messen.`},
+{k:"Beispiel",q:"Schmidt Logistik: Warum Pareto nach Wert und Anzahl vergleichen?",
+ a:`<p>Der <b>häufigste</b> Schaden (Transportbruch) ist nicht der <b>teuerste</b>. Der deutlich seltenere <b>Verlust/Diebstahl</b> verursacht den höchsten Schadenswert in Euro.</p><p>Beide Sichten sind wichtig: eine zur <b>Prozessoptimierung</b>, die andere zur <b>Risikosteuerung</b>.</p>`},
+];
+function renderFlash(){
+  document.getElementById("flashList").innerHTML=FLASH.map(({k,q,a,trap},i)=>`<article class="qitem fitem" id="fc${i}" style="--fc:${FC_COL[k]||"#6366f1"}">
+    <div class="fhead"><span class="qn" style="background:var(--fc)">Karte ${i+1}</span><span class="fcat">${esc(k)}</span></div>
+    <div class="qt">${esc(q)}</div>
+    <button class="btn revbtn" data-fc="${i}" aria-expanded="false" aria-controls="fca${i}">Antwort aufdecken</button>
+    <div class="fans" id="fca${i}" hidden>${a}${trap?`<div class="trap"><b>⚠ Falle/Hinweis:</b> ${trap}</div>`:""}</div>
+  </article>`).join("");
+  flashCount();
+}
+function setFc(i,on){
+  const it=document.getElementById("fc"+i), b=it.querySelector(".revbtn");
+  it.classList.toggle("open",on); document.getElementById("fca"+i).hidden=!on;
+  b.setAttribute("aria-expanded",on); b.textContent=on?"Antwort verbergen":"Antwort aufdecken";
+}
+function flashCount(){const n=document.querySelectorAll("#flashList .qitem.open").length;document.getElementById("fcCount").textContent=`${n} von ${FLASH.length} Antworten aufgedeckt`;}
+document.getElementById("flashList").onclick=e=>{const b=e.target.closest("[data-fc]");if(!b)return;const i=+b.dataset.fc;setFc(i,!document.getElementById("fc"+i).classList.contains("open"));flashCount();};
+document.getElementById("fcAll").onclick=()=>{FLASH.forEach((_,i)=>setFc(i,true));flashCount();};
+document.getElementById("fcNone").onclick=()=>{FLASH.forEach((_,i)=>setFc(i,false));flashCount();};
+
+/* ---------- Reiter ---------- */
+const TABS=[{id:"cards",btn:"tabCards",view:"cardsView",hash:""},{id:"quiz",btn:"tabQuiz",view:"quizView",hash:"#quiz"},{id:"flash",btn:"tabFlash",view:"flashView",hash:"#flashcards"}];
+let activeTab="cards";
+function showTab(t,push){
+  activeTab=t; const cards=t==="cards";
+  for(const x of TABS){document.getElementById(x.btn).setAttribute("aria-selected",x.id===t);document.getElementById(x.view).hidden=x.id!==t;}
+  document.getElementById("viewBtn").hidden=!cards; document.getElementById("ownBtn").hidden=!cards;
+  if(!cards) document.getElementById("ownPanel").hidden=true;
+  if(push){const h=TABS.find(x=>x.id===t).hash; try{history.replaceState(null,"",h||location.pathname+location.search);}catch(e){}}
+}
+for(const x of TABS) document.getElementById(x.btn).onclick=()=>showTab(x.id,true);
+document.querySelector(".tabs").addEventListener("keydown",e=>{if(e.key==="ArrowRight"||e.key==="ArrowLeft"){e.stopPropagation();const i=TABS.findIndex(x=>x.id===activeTab),n=TABS[(i+(e.key==="ArrowRight"?1:TABS.length-1))%TABS.length];showTab(n.id,true);document.getElementById(n.btn).focus();}});
+renderQuiz(); renderFlash();
+{const h=TABS.find(x=>x.hash&&x.hash===location.hash); if(h) showTab(h.id,false);}
 render();
 </script>
 </body>

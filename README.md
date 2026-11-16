@@ -1,8 +1,10 @@
 # Lernkarten Prozessanalyse (Modul 3)
 
-Interaktive Lernkarten zu Modul 3: 144 Karten in Themen wie Pareto, Ishikawa/5-Why, KPI, Wertstrom/PCE, ROI, Reife, Score-Modell und Pitch.
+Interaktive Lernkarten zu Modul 3 „Prozessanalyse und KPIs“: 124 Karten in Themen wie Pareto, Ishikawa/5-Why, KPI, Wertstrom/PCE, ROI, Reife, Score-Modell und Pitch.
 
 - `index.html` öffnen (läuft offline im Browser, keine Installation nötig)
 - Volltextsuche, eigene Themen und Karten (im Browser gespeichert, Export/Import als JSON)
+- Reiter „M03: Quiz“: Multiple-Choice-Fragen aus dem Selbstcheck mit „Lösung aufdecken“, nichts wird gespeichert (Direktlink: `#quiz`)
+- Reiter „M03: Flashcards“: 20 Kurs-Flashcards zum Selbst-Abfragen mit „Antwort aufdecken“, nichts wird gespeichert (Direktlink: `#flashcards`)
 
-Mit GitHub Pages (Settings → Pages → Branch `main`, Ordner `/`) ist die Seite direkt online erreichbar.
+Online: https://leudjeu-hub.github.io/Lernkarte_Prozessanalyse/
